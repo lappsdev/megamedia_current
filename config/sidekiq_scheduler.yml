@@ -1,0 +1,5 @@
+reboot_all_devices:
+  cron: '0 23 * * *'
+  class: RebootAllDevicesWorker
+  description: 'Reinicia todos os dispositivos com dados SSH cadastrados'
+  

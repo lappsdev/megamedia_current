@@ -1,0 +1,2 @@
+class PasswordCallerWidgetResource < WidgetResource
+end

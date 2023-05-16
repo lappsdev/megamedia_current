@@ -1,0 +1,25 @@
+<div class="row">
+<table class="table table-striped table-responsive-md btn-table">
+
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Código dos produtos</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_tables.each do |product_table| %>
+        <tr>
+            <td><%= product_table.title %></td>
+            <td><%= product_table.product_codes %></td>
+            <td></td>
+        </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+</div>
+<%= render "common/new_floating_button", url: new_product_table_path %>

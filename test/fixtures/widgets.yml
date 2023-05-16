@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  x: 1
+  'y': 1
+  width: 1
+  height: 1
+  screen: one
+
+two:
+  title: MyString
+  description: MyText
+  x: 1
+  'y': 1
+  width: 1
+  height: 1
+  screen: two

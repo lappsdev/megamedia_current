@@ -1,0 +1,35 @@
+require 'sidekiq/web'
+require 'sidekiq-scheduler/web'
+Rails.application.routes.draw do
+  root 'home#index'
+  get '404', to: 'home#index'
+  mount Sidekiq::Web => '/sidekiq'
+  mount ActionCable.server => '/cable'
+  mount VandalUi::Engine, at: '/vandal'
+
+  scope path: ApplicationResource.endpoint_namespace, defaults: { format: :jsonapi } do
+    resources :schedulers
+    resources :password_caller_widgets
+    resources :ssh_commands
+    resources :product_table_widgets
+    resources :queue_caller_widgets
+
+    resources :products
+    resources :price_checker_widgets
+    resources :video_widgets
+    resources :medias
+    resources :attachments
+    resources :image_widgets
+    resources :users
+    resources :widgets
+    resources :screens
+    resources :devices
+    resources :units
+    resources :groups
+    resources :credentials
+
+    # your routes go here
+  end
+
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+end

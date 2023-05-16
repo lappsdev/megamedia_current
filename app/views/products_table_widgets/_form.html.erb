@@ -1,0 +1,49 @@
+<%= form_for widget.persisted? ? widget : [@screen, widget], as: :widget do |f| %>
+  <div class="md-form">
+    <%= f.text_field :title, placeholder: "Título da Widget", class: "form-control mb-4" %>
+    <%= f.label :title, "Título" %>
+  </div>
+
+  <div class="md-form">
+    <%= f.text_field :description, class: "form-control mb-4" %>
+    <%= f.label :description, "Descrição" %>
+  </div>
+  <div class="md-form">
+    <%= f.text_field :product_codes, class: "form-control mb-4" %>
+    <%= f.label :product_codes, "Código dos produtos" %>
+  </div>
+
+  <select class="mdb-select md-form" name="product_table_widget[product_table_ids][]" multiple searchable="Search here..">
+             <option value="" disabled selected>Selecione</option>
+
+    <% current_user.product_tables.each do |product_table| %>
+
+    <option value="<%= product_table.id %>"><%= product_table.title %></option>
+
+    <%  end %>
+</select>
+
+  <div class="md-form">
+    <%= f.text_field :x, class: "form-control mb-4" %>
+    <%= f.label :x, "Posição X" %>
+  </div>
+
+  <div class="md-form">
+    <%= f.text_field :y, class: "form-control mb-4" %>
+    <%= f.label :y, "Posição Y" %>
+  </div>
+
+  <div class="md-form">
+    <%= f.text_field :width, class: "form-control mb-4" %>
+    <%= f.label :width, "Largura" %>
+  </div>
+
+  <div class="md-form">
+    <%= f.text_field :height, class: "form-control mb-4" %>
+    <%= f.label :height, "Altura" %>
+  </div>
+
+  <%= f.submit "Cadastrar", class: "btn btn-success btn-block" %>
+
+
+<% end %>

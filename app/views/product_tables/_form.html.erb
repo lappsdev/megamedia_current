@@ -1,0 +1,14 @@
+<%= form_for product_table do |f| %>
+  <div class="md-form">
+    <%= f.text_field :title, placeholder: "Título da Widget", class: "form-control mb-4" %>
+    <%= f.label :title, "Título" %>
+  </div>
+  <div class="md-form">
+    <%= f.text_field :product_codes, class: "form-control mb-4" %>
+    <%= f.label :product_codes, "Código dos produtos" %>
+  </div>
+
+  <%= f.submit "Cadastrar", class: "btn btn-success btn-block" %>
+
+
+<% end %>

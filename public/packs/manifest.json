@@ -1,0 +1,64 @@
+{
+  "application.css": "/packs/css/application-26c1f4da.css",
+  "application.js": "/packs/js/application-969e35cb1d1b65d358d6.js",
+  "application.js.map": "/packs/js/application-969e35cb1d1b65d358d6.js.map",
+  "entrypoints": {
+    "application": {
+      "css": [
+        "/packs/css/application-26c1f4da.css"
+      ],
+      "js": [
+        "/packs/js/application-969e35cb1d1b65d358d6.js"
+      ],
+      "js.map": [
+        "/packs/js/application-969e35cb1d1b65d358d6.js.map"
+      ]
+    },
+    "hello_vue": {
+      "js": [
+        "/packs/js/hello_vue-46691b83345492daeb03.js"
+      ],
+      "js.map": [
+        "/packs/js/hello_vue-46691b83345492daeb03.js.map"
+      ]
+    }
+  },
+  "hello_vue.js": "/packs/js/hello_vue-46691b83345492daeb03.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-46691b83345492daeb03.js.map",
+  "media/fonts/materialdesignicons-webfont.eot?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-53f53f50.eot",
+  "media/fonts/materialdesignicons-webfont.ttf?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-0e4e0b3d.ttf",
+  "media/fonts/materialdesignicons-webfont.woff2?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-e9db4005.woff2",
+  "media/fonts/materialdesignicons-webfont.woff?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-d8e8e0f7.woff",
+  "media/sounds/001.mp3": "/packs/media/sounds/001-1a32b918.mp3",
+  "media/sounds/002.mp3": "/packs/media/sounds/002-7882f2e4.mp3",
+  "media/sounds/003.mp3": "/packs/media/sounds/003-f689141f.mp3",
+  "media/sounds/004.mp3": "/packs/media/sounds/004-469ebb44.mp3",
+  "media/sounds/005.mp3": "/packs/media/sounds/005-23a14eff.mp3",
+  "media/sounds/006.mp3": "/packs/media/sounds/006-41b03fa1.mp3",
+  "media/sounds/007.mp3": "/packs/media/sounds/007-fa690c7a.mp3",
+  "media/sounds/008.mp3": "/packs/media/sounds/008-3ceb4c17.mp3",
+  "media/sounds/009.mp3": "/packs/media/sounds/009-d60f9e18.mp3",
+  "media/sounds/010.mp3": "/packs/media/sounds/010-30ae3b36.mp3",
+  "media/sounds/011.mp3": "/packs/media/sounds/011-6da5a5e5.mp3",
+  "media/sounds/012.mp3": "/packs/media/sounds/012-9059a681.mp3",
+  "media/sounds/013.mp3": "/packs/media/sounds/013-f56dc812.mp3",
+  "media/sounds/014.mp3": "/packs/media/sounds/014-52547396.mp3",
+  "media/sounds/015.mp3": "/packs/media/sounds/015-d5d91857.mp3",
+  "media/sounds/016.mp3": "/packs/media/sounds/016-be67e87c.mp3",
+  "media/sounds/017.mp3": "/packs/media/sounds/017-ffe4b3fe.mp3",
+  "media/sounds/018.mp3": "/packs/media/sounds/018-d7f7019b.mp3",
+  "media/sounds/019.mp3": "/packs/media/sounds/019-1b7ff9dc.mp3",
+  "media/sounds/020.mp3": "/packs/media/sounds/020-5e1dd5c8.mp3",
+  "media/sounds/021.mp3": "/packs/media/sounds/021-6182e6f3.mp3",
+  "media/sounds/022.mp3": "/packs/media/sounds/022-f12c0ced.mp3",
+  "media/sounds/023.mp3": "/packs/media/sounds/023-66447574.mp3",
+  "media/sounds/024.mp3": "/packs/media/sounds/024-1edefc32.mp3",
+  "media/sounds/025.mp3": "/packs/media/sounds/025-74f37208.mp3",
+  "media/sounds/026.mp3": "/packs/media/sounds/026-5d4e2d4d.mp3",
+  "media/sounds/027.mp3": "/packs/media/sounds/027-90955925.mp3",
+  "media/sounds/028.mp3": "/packs/media/sounds/028-283d650e.mp3",
+  "media/sounds/029.mp3": "/packs/media/sounds/029-5401ddfd.mp3",
+  "media/sounds/030.mp3": "/packs/media/sounds/030-4aa3c260.mp3",
+  "media/sounds/031.mp3": "/packs/media/sounds/031-01a7cf81.mp3",
+  "media/sounds/dingdong.mp3": "/packs/media/sounds/dingdong-db8b081a.mp3"
+}

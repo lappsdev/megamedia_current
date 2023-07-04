@@ -1,12 +1,15 @@
 FROM ruby:3.2.2
-RUN set -x \
-    && curl -sL 'https://deb.nodesource.com/setup_16.x' | bash - \
-    && apt-get -y install nodejs \
-    && ln -s /usr/bin/nodejs /usr/local/bin/node
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+ENV NODE_VERSION=16.20.1
+RUN apt install -y curl
+ENV NVM_DIR=/root/.nvm
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.0/install.sh | bash
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
+RUN npm install -g yarn
 RUN apt-get update -yqq && apt-get install -yq --no-install-recommends \
     apt-utils \
     curl \

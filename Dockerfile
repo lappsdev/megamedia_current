@@ -48,6 +48,8 @@ ENV RAILS_ENV='production'
 ENV RACK_ENV='production' 
 
 EXPOSE 5000
-
-CMD service cron start && bundle exec rake db:migrate && rails assets:precompile && rails webpacker:compile && rails s -b  0.0.0.0 
+ARG SECRET_KEY_BASE=fakekeyforassets
+RUN bin/rails assets:clobber && bundle exec rails assets:precompile && rails webpacker:compile
+RUN bundle exec rake db:migrate
+CMD service cron start && rails s 
 

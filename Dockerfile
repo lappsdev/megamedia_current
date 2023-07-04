@@ -49,7 +49,7 @@ ENV RACK_ENV='production'
 
 EXPOSE 5000
 ARG SECRET_KEY_BASE=fakekeyforassets
-RUN bin/rails assets:clobber && bundle exec rails assets:precompile && rails webpacker:compile
+RUN bundle exec rails assets:precompile && rails webpacker:compile
 RUN bundle exec rake db:migrate
 CMD service cron start && rails s 
 

@@ -1,9 +1,0 @@
-{
-    "name": "Megamedia",
-    "scripts": {
-        "dokku": {
-            "predeploy": "bundle exec rake assets:precompile && bundle exec rails webpacker:compile",
-            "postdeploy": "bundle exec rake db:migrate"
-        }
-    }
-}

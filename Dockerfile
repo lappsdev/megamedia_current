@@ -34,16 +34,19 @@ RUN apt-get update -yqq && apt-get install -yq --no-install-recommends \
     cron \
     ca-certificates
 RUN mkdir /varejo4tech
+
+COPY Gemfile /varejo4tech/Gemfile
+COPY Gemfile.lock /varejo4tech/Gemfile.lock
+COPY . /varejo4tech
+
 WORKDIR /varejo4tech
 RUN node -v
 RUN yarn install
-COPY Gemfile /varejo4tech/Gemfile
-COPY Gemfile.lock /varejo4tech/Gemfile.lock
+
 RUN bundle install --without development test
 
 COPY package.json /varejo4tech/package.json
 
-COPY . /varejo4tech
 ENV RAILS_ENV='production'
 ENV RACK_ENV='production' 
 
@@ -51,5 +54,6 @@ EXPOSE 5000
 ARG SECRET_KEY_BASE=fakekeyforassets
 RUN bundle exec rails assets:precompile && rails webpacker:compile
 RUN bundle exec rake db:migrate
+RUN ls
 CMD service cron start && rails s 
 

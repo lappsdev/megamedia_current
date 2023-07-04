@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'webpacker', '~>5.0'
@@ -17,6 +17,7 @@ gem 'responders'
 gem 'sambal'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem 'aws-sdk-s3', '~> 1'
 
 gem 'store_base_sti_class'
 # Use Redis adapter to run Action Cable in production
@@ -61,6 +62,7 @@ gem 'vandal_ui'
 group :development, :test do
   gem 'factory_bot_rails', '~> 5.0'
   gem 'faker', '~> 2.5'
+  gem 'dotenv-rails'
   gem 'graphiti_spec_helpers'
   gem 'rspec-rails', '~> 4.0.0beta2'
 end

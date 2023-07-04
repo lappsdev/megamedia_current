@@ -23,11 +23,11 @@ default: &default
 
 development:
   <<: *default
-  host: db
-  username: postgres
+  database: aquiagora
+  host: 54.39.211.59
+  username: varejo4tech
   port: 5432
-  password: LocalPassword
-  database: megamedia_development
+  password: H48ajAL1S8Bn4sqE
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -87,5 +87,9 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  database: aquiagora
+  host: 54.39.211.59
+  username: varejo4tech
+  port: 5432
+  password: H48ajAL1S8Bn4sqE
 

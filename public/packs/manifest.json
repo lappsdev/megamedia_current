@@ -1,30 +1,26 @@
 {
-  "application.css": "/packs/css/application-26c1f4da.css",
-  "application.js": "/packs/js/application-969e35cb1d1b65d358d6.js",
-  "application.js.map": "/packs/js/application-969e35cb1d1b65d358d6.js.map",
+  "application.js": "/packs/application-baf74b069942983434be.js",
+  "application.js.map": "/packs/application-baf74b069942983434be.js.map",
   "entrypoints": {
     "application": {
-      "css": [
-        "/packs/css/application-26c1f4da.css"
-      ],
       "js": [
-        "/packs/js/application-969e35cb1d1b65d358d6.js"
+        "/packs/application-baf74b069942983434be.js"
       ],
       "js.map": [
-        "/packs/js/application-969e35cb1d1b65d358d6.js.map"
+        "/packs/application-baf74b069942983434be.js.map"
       ]
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-46691b83345492daeb03.js"
+        "/packs/hello_vue-baf74b069942983434be.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-46691b83345492daeb03.js.map"
+        "/packs/hello_vue-baf74b069942983434be.js.map"
       ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-46691b83345492daeb03.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-46691b83345492daeb03.js.map",
+  "hello_vue.js": "/packs/hello_vue-baf74b069942983434be.js",
+  "hello_vue.js.map": "/packs/hello_vue-baf74b069942983434be.js.map",
   "media/fonts/materialdesignicons-webfont.eot?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-53f53f50.eot",
   "media/fonts/materialdesignicons-webfont.ttf?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-0e4e0b3d.ttf",
   "media/fonts/materialdesignicons-webfont.woff2?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-e9db4005.woff2",

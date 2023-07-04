@@ -1,21 +1,51 @@
-FROM pawurb/ruby-jemalloc-node-yarn:latest
+FROM ruby:3.2.2
 
-COPY Gemfile* /tmp/
-COPY package.json /tmp/
-COPY yarn.lock /tmp/
-WORKDIR /tmp
-RUN gem install bundler
-RUN bundle install --jobs 5 --retry 5 --without development test
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN set -x \
+    && curl -sL 'https://deb.nodesource.com/setup_16.x' | bash - \
+    && apt-get -y install nodejs \
+    && ln -s /usr/bin/nodejs /usr/local/bin/node
+
+RUN apt-get update -yqq && apt-get install -yq --no-install-recommends \
+    apt-utils \
+    curl \
+    # Install git
+    git \
+    nodejs \
+    yarn \
+    tzdata \
+    libpq-dev \
+    libldap2-dev \
+    libaio1 \
+    libaio-dev \
+    smbclient \ 
+    ffmpeg \
+    # Install tools
+    openssl \
+    nano \
+    rlwrap \
+    make \
+    unzip \
+    zip \
+    tar \
+    locales \
+    cron \
+    ca-certificates
+RUN mkdir /varejo4tech
+WORKDIR /varejo4tech
+COPY Gemfile /varejo4tech/Gemfile
+COPY Gemfile.lock /varejo4tech/Gemfile.lock
+RUN bundle install --without development test
+
+COPY package.json /varejo4tech/package.json
 RUN yarn install
 
-RUN mkdir /app
-WORKDIR /app
-COPY . /app
-ENV RAILS_ENV production
-ENV RACK_ENV production
-RUN mkdir tmp
-RUN mkdir tmp/pids
-RUN apt-get update 
-RUN apt-get install -y  smbclient ffmpeg
+COPY . /varejo4tech
+ENV RAILS_ENV='production'
+ENV RACK_ENV='production' 
 
-CMD ["bin/run-dev.sh"]
+EXPOSE 5000
+
+CMD service cron start && bundle exec rake db:migrate && rails assets:precompile && rails webpacker:compile && rails s -b  0.0.0.0 
+

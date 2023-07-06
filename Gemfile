@@ -21,7 +21,7 @@ gem 'aws-sdk-s3', '~> 1'
 
 gem 'store_base_sti_class'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 5.0'
 # Use Active Model has_secure_password
 gem 'active_data'
 gem 'bcrypt', '~> 3.1.7'

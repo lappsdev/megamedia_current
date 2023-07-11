@@ -1,5 +1,5 @@
 class Current < ActiveSupport::CurrentAttributes
-  attribute :session, :user
+  attribute :session, :user, :device
   attribute :user_agent, :ip_address
 
   def session=(session)

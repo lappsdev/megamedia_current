@@ -1,5 +1,5 @@
 class CredentialsController < ApplicationController
-  skip_before_action :authenticate_user
+  skip_before_action :authenticate
 
   def create
     unless params[:data].key?(:attributes) && params[:data][:attributes].key?(:login)

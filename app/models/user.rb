@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_secure_password
   belongs_to :group
   validates_presence_of :name
 
@@ -11,4 +12,9 @@ class User < ApplicationRecord
     admin: 0,
     marketing: 1
   }
+  has_many :sessions, dependent: :destroy
+
+  validates :password, allow_nil: true, length: { minimum: 12 }
+
+
 end

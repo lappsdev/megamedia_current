@@ -2,6 +2,7 @@ class ConvertVideoAttachmentWorker
   include Sidekiq::Worker
 
   def perform(attachment_id)
+    return
     attachment = Attachment.find(attachment_id)
     file = attachment.file
     if file.attached? && file.video?

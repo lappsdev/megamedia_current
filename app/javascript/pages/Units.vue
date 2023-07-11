@@ -59,6 +59,8 @@
 import Table from "components/Table";
 import Form from "components/Units/Form";
 import { Unit } from "models/unit.model";
+import { Attachment } from "models/attachment.model";
+
 export default {
   components: {
     Table,
@@ -113,11 +115,7 @@ export default {
     },
   },
   created() {
-    Attachment.includes(["scheduler"])
-      .find(this.id)
-      .then((response) => {
-        this.attachment = response.data;
-      });
+   
   },
 };
 </script>

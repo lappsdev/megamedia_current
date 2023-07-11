@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   def index
-    users = UserResource.all(params)
-    respond_with(users)
+    respond_to do |format|
+      format.html{ @screens = Current.user.group.users }
+      format.jsonapi{
+        users = UserResource.all(params)
+        respond_with(users)
+      }
+    end
   end
 
   def show

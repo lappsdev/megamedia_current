@@ -1,8 +1,5 @@
 <template>
   <div>
-    <AppBar></AppBar>
-    <Drawer></Drawer>
-
     <v-main>
       <v-container class="py-8 px-6" fluid>
         <v-row>

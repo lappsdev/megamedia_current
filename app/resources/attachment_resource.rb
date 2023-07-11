@@ -16,18 +16,28 @@ class AttachmentResource < ApplicationResource
   end
 
   filter :group_id, :integer
-  filter :attachable_id, :integer, only: [:eq] do
+  filter :attachable_id, :integer, only: [:eq, :eql] do
     eq do |scope, value|
       scope
         .includes(:medias)
         .where(medias: { attachable_id: value })
     end
+    eql do |scope, value|
+      scope
+        .includes(:medias)
+        .where(medias: { attachable_id: value })
+    end
   end
-  filter :attachable_type, :string, only: [:eq] do
+  filter :attachable_type, :string, only: [:eq, :eql] do
     eq do |scope, value|
       scope
         .includes(:medias)
         .where(medias: { attachable_type: value })
+    end
+    eql do |scope, value|
+      scope
+        .includes(:medias)
+        .where(medias: { attachable_id: value })
     end
   end
 

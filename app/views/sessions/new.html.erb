@@ -1,0 +1,28 @@
+<%= polaris_page(title: "Área de login") do %>
+  <%= polaris_vertical_stack(align: :center) do %>
+    <%= polaris_card do |card|%>
+      <div class="Polaris-Text--center" style="margin: 20px 0px;">
+        <a href="/" class="comfortaa-700 Polaris-Text--center" style="font-size:42px; text-decoration: none; ">
+          <b class="font-megamedia-gradient">varejo</b>4<b class="font-megamedia-gradient">tech</b>
+        </a>
+      </div>
+      <p>
+        <p style="color: green"><%= notice %></p>
+        <p style="color: red"><%= alert %></p>
+        <%= form_with(url: sign_in_path, builder: Polaris::FormBuilder) do |form| %>
+          <%= polaris_form_layout do |form_layout| %>
+            <% form_layout.with_item do %>
+              <%= form.polaris_text_field(:login, required: true, value: params[:login_hint]) %>
+            <% end %>
+            <% form_layout.with_item do %>
+              <%= form.polaris_text_field(:password, label: "Senha", type: :password, required: true) %>
+            <% end %>
+            <% form_layout.with_item do %>
+              <%= polaris_button(submit: true, primary: true) { "Acessar" } %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

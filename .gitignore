@@ -3,6 +3,10 @@ node_modules
 /tmp/*
 /.bundle
 /start.sh
+/public/packs/*
+/public/packs
+/public/packs-test
+/public/assets
 start.sh
 db/schema.rb
 .env

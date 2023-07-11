@@ -8,6 +8,7 @@ class ApplicationResource < Graphiti::Resource
   self.base_url = Rails.application.routes
                        .default_url_options[:host]
   self.endpoint_namespace = '/api/v1'
+  self.default_page_size = 100
 end
 
 JsonTypes.all_modules.reject { |el| el == JsonTypes }.each do |el|

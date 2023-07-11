@@ -1,0 +1,23 @@
+{
+    "[html.erb]": {
+      "editor.formatOnSave": true
+    },
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[erb]": {
+      "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+      "editor.formatOnSave": true
+    },
+    "files.associations": {
+      "*.html.erb": "erb",
+      "*.erb": "html"
+    },
+    "emmet.includeLanguages": {
+      "ruby": "html"
+    },
+    "editor.formatOnSave": true,
+    "solargraph.autoformat": true,
+    "solargraph.diagnostics": true,
+    "solargraph.formatting": true,
+  }

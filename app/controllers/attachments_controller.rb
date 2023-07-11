@@ -1,7 +1,13 @@
 class AttachmentsController < ApplicationController
   def index
-    attachments = AttachmentResource.all(params)
-    respond_with(attachments)
+    respond_to do |format|
+      format.html{ @attachments = []}
+      format.jsonapi{
+        attachments = AttachmentResource.all(params)
+        respond_with(attachments)
+      }
+    end
+
   end
 
   def show
@@ -11,7 +17,7 @@ class AttachmentsController < ApplicationController
 
   def create
     attachment = Attachment.new(params.require(:attachment).permit(:file))
-    attachment.group = current_user.group
+    attachment.group = Current.user.group
     if attachment.save
       render json: attachment, status: :created
     else

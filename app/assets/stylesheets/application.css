@@ -1,0 +1,46 @@
+.font-megamedia-gradient {
+    background: linear-gradient(90deg, #456bbe, #c44c79);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-v4t-gradient {
+    background: linear-gradient(90deg, #456bbe, #c44c79);
+
+}
+
+.comfortaa {
+    font-family: "Comfortaa";
+    font-weight: 400;
+}
+
+.comfortaa-300 {
+    font-family: "Comfortaa";
+    font-weight: 300;
+
+}
+
+.comfortaa-400 {
+    font-family: "Comfortaa";
+    font-weight: 400;
+
+}
+
+.comfortaa-500 {
+    font-family: "Comfortaa";
+    font-weight: 500;
+
+}
+
+.comfortaa-600 {
+    font-family: "Comfortaa";
+    font-weight: 600;
+
+}
+
+
+.comfortaa-700 {
+    font-family: "Comfortaa";
+    font-weight: 700;
+
+}

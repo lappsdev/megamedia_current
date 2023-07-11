@@ -53,7 +53,7 @@ ENV RACK_ENV='production'
 EXPOSE 5000
 ARG SECRET_KEY_BASE=fakekeyforassets
 RUN bundle exec rails assets:precompile && rails webpacker:compile
-RUN bundle exec rake db:migrate
+#RUN bundle exec rake db:migrate
 RUN cd; cd -
 RUN ls
 CMD ["bin/run-dev.sh"]

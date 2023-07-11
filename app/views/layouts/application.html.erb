@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <title>MegaMedia</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  
-  <%= action_cable_meta_tag %>
-
-  <%= stylesheet_pack_tag 'application', media: 'all' %>
+<html style="<%= polaris_html_styles %>">
+  <head>
+    <title>Varejo 4 Tech</title>
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= action_cable_meta_tag %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application', defer: true%>
-
-
-</head>
-
-<body>
-<div id="app">
-    <app></app>
-    </div>
-</body>
-
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload"  %>
+    <%= stylesheet_link_tag "polaris_view_components" %>
+  </head>
+  <body style="<%= polaris_body_styles %>">
+    <script>
+      localStorage.setItem("token", "<%= @json_web_token%>");
+    </script>
+    <%= polaris_frame do |frame| %>
+      <% frame.with_top_bar do |top_bar| %>
+        <% top_bar.with_user_menu(name: Current.user.name, detail: "") do |user_menu| %>
+          <% user_menu.with_avatar(initials: Current.user.name[0]) %>
+          <%= polaris_action_list do |action_list| %>
+            <% action_list.with_item(icon: "LogOutMinor", url: session_path(Current.session), data: {turbo: "true", method: :delete,  "turbo-method": :delete }) { "Sair" } %>
+          <% end %>
+        <% end %>
+      <% end if Current.user %>
+      <% frame.with_navigation do |navigation| %>
+        <% navigation.with_section(title: "Varejo4Tech") do |section| %>
+          <% section.with_item(url: "#", label: "Tela inicial", icon: "HomeMinor") %>
+          <% section.with_item(url: units_path + "#/admin/units", label: "Unidades", icon: "BankMajor") %>
+          <% section.with_item(url: devices_path + "#/admin/devices", label: "Equipamentos", icon: "AutomationMajor") %>
+          <% section.with_item(url: screens_path + "#/admin/screens", label: "Telas", icon: "DesktopMajor") %>
+          <% section.with_item(url: attachments_path + "#/admin/attachments", label: "Mídias", icon: "ImageMajor") %>
+          <% section.with_item(url: users_path + "#/admin/users", label: "Usuários", icon: "CustomersMajor") %>
+        <% end %>
+      <% end if Current.user   %>
+      <%= yield %>
+      <% frame.with_toasts do %>
+        <%= polaris_toast(id: "error-toast", error: true) { "#{alert}" } if alert%>
+        <%= polaris_toast(id: "notice-toast") { "#{notice}" } if notice%>
+      <% end %>
+    <% end %>
+  </body>
 </html>

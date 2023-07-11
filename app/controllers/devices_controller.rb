@@ -1,7 +1,13 @@
 class DevicesController < ApplicationController
   def index
-    devices = DeviceResource.all(params)
-    respond_with(devices)
+    respond_to do |format|
+      format.html{ @devices = Current.user.group.devices }
+      format.jsonapi{
+        devices = DeviceResource.all(params)
+        respond_with(devices)
+      }
+    end
+
   end
 
   def show

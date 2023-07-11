@@ -1,11 +1,23 @@
 require 'sidekiq/web'
 require 'sidekiq-scheduler/web'
 Rails.application.routes.draw do
+  get  'sign_in', to: 'sessions#new'
+  post 'sign_in', to: 'sessions#create'
+  get  'sign_up', to: 'registrations#new'
+  post 'sign_up', to: 'registrations#create'
+  resources :sessions, only: %i[index show destroy]
+  resource  :password, only: %i[edit update]
+
   root 'home#index'
   get '404', to: 'home#index'
   mount Sidekiq::Web => '/sidekiq'
   mount ActionCable.server => '/cable'
   mount VandalUi::Engine, at: '/vandal'
+  resources :units
+  resources :devices
+  resources :screens
+  resources :users
+  resources :attachments
 
   scope path: ApplicationResource.endpoint_namespace, defaults: { format: :jsonapi } do
     resources :schedulers

@@ -15,7 +15,7 @@ class Attachment < ApplicationRecord
   attr_accessor :attachable_id, :attachable_type
 
   before_save :set_attach_type
-
+  before_create :set_name
   scope :expired, -> { where('expired_at < ?', Time.now) }
   def expired?
     !!(expired_at && Time.now.after?(expired_at))
@@ -31,5 +31,11 @@ class Attachment < ApplicationRecord
     elsif file.video?
       self.attach_type = 'video'
     end
+  end
+
+  private
+
+  def set_name
+    self.name ||= file.filename.to_s
   end
 end

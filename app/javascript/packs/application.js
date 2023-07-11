@@ -3,7 +3,12 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
+
+import "../controllers"
+
+
 import '@mdi/font/css/materialdesignicons.css'
+import "@hotwired/turbo-rails"
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -18,11 +23,15 @@ import VueBarcodeScanner from 'vue-barcode-scanner'
 import VuetifyToast from 'vuetify-toast-snackbar-ng'
 
 import App from '../app.vue'
+import UnitsPage from '../pages/Units.vue'
+
 import VueHotkey from 'v-hotkey'
 import VueResizeText from 'vue-resize-text';
 import VuetifyDialog from 'vuetify-dialog'
 import 'vuetify-dialog/dist/vuetify-dialog.css'
 import DatetimePicker from 'vuetify-datetime-picker'
+
+Turbo.session.drive = false
 Vue.use(require('vue-moment'));
 
 Vue.use(DatetimePicker)
@@ -30,6 +39,8 @@ Vue.use(VueResizeText)
 Vue.use(VueHotkey, {
   'plus': 107
 })
+
+Vue.component("units-page", UnitsPage)
 
 Vue.component("app", App)
 const vuetify = new Vuetify({
@@ -52,7 +63,7 @@ var env = process.env.RAILS_ENV || "development"
 Vue.use(ActionCableVue, {
   debug: true,
   debugLevel: 'error',
-  connectionUrl: env == "development" ? 'ws://localhost:3000/cable' : 'ws://192.168.1.185:3001/cable', // or function which returns a string with your JWT appended to your server URL as a query parameter
+  connectionUrl: env == "development" ? 'ws://localhost:5000/cable' : 'ws://192.168.1.185:5000/cable', // or function which returns a string with your JWT appended to your server URL as a query parameter
   connectImmediately: true,
 });
 Vue.use(VueBarcodeScanner)
@@ -81,4 +92,4 @@ const app = new Vue({
   components: { App }
 })
 
-
+console.log("TESTE")

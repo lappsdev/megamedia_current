@@ -1,0 +1,36 @@
+<%= polaris_page(
+  title: @attachment.name,
+  back_url: "/attachments",
+
+  secondary_actions: [
+    { content: "Excluir", url: attachment_path(@attachment), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <% page.with_primary_action(disabled: true) { "Editar" } %>
+  <%= polaris_card(title: "Informações") do %>
+    <%= polaris_description_list do |list| %>
+      <% list.with_item(term: "Preview") do %>
+        <% if @attachment.image? %>
+          <%= polaris_thumbnail(source: rails_blob_path(@attachment.file, only_path: true), size: :large) %>
+        <% else %>
+          <%= polaris_skeleton_thumbnail(size: :large) %>
+        <% end%>
+      <% end %>
+      <% list.with_item(term: "Nome da mídia") do %>
+        <%= @attachment.name %>
+      <% end %>
+      <% list.with_item(term: "Nome do arquivo") do %>
+        <%= @attachment.file.filename.to_s %>
+      <% end %>
+      <% list.with_item(term: "Data de upload") do %>
+        <%= @attachment.created_at.strftime("%d/%m/%Y às %H:%M:%S") %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= polaris_card(title: "Configurações de agendamento") do %>
+    <%= polaris_empty_state(
+    heading: "Função ainda não implementada",
+    image: "https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png",
+  ) %>
+  <% end %>
+<% end %>

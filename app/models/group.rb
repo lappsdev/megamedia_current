@@ -4,4 +4,5 @@ class Group < ApplicationRecord
   has_many :units
   has_many :devices, through: :units
   has_many :screens
+  has_many :attachments
 end

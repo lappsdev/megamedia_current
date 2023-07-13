@@ -1,7 +1,7 @@
 class AttachmentsController < ApplicationController
   def index
     respond_to do |format|
-      format.html{ @attachments = []}
+      format.html{ @attachments = Current.user.group.attachments.order(created_at: :desc)}
       format.jsonapi{
         attachments = AttachmentResource.all(params)
         respond_with(attachments)
@@ -11,17 +11,30 @@ class AttachmentsController < ApplicationController
   end
 
   def show
-    attachment = AttachmentResource.find(params)
-    respond_with(attachment)
+    respond_to do |format|
+      format.html { @attachment = Attachment.find(params[:id]) }
+      format.jsonapi{ 
+        attachment = AttachmentResource.find(params)
+        respond_with(attachment)
+      }
+    end
+
+
   end
 
   def create
     attachment = Attachment.new(params.require(:attachment).permit(:file))
     attachment.group = Current.user.group
     if attachment.save
-      render json: attachment, status: :created
+      respond_to do |format|
+        format.html { redirect_to attachments_url, notice: 'Upload de mídia realizado com sucesso!' }
+        format.jsonapi{ render json: attachment, status: :created }
+      end
     else
-      render json: attachment, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :index, status: :unprocessable_entity, alert: 'Falha ao realizar upload' }
+        format.jsonapi{ render json: attachment, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -36,12 +49,27 @@ class AttachmentsController < ApplicationController
   end
 
   def destroy
-    attachment = AttachmentResource.find(params)
+    respond_to do |format|
+      format.html { 
+        @attachment = Attachment.find(params[:id])
+        if @attachment.destroy
+          redirect_to attachments_url, notice: 'Mídia excluída com sucesso!' 
+        else
+          render :show, status: :unprocessable_entity 
+        end
+      }
 
-    if attachment.destroy
-      render jsonapi: { meta: {} }, status: 200
-    else
-      render jsonapi_errors: attachment
+      format.jsonapi{  
+        attachment = AttachmentResource.find(params)
+
+        if attachment.destroy
+          render jsonapi: { meta: {} }, status: 200
+        else
+          render jsonapi_errors: attachment
+        end
+      }
     end
+
+   
   end
 end

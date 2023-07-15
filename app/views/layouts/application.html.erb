@@ -30,7 +30,7 @@
           <% section.with_item(url: units_path + "#/admin/units", label: "Unidades", icon: "BankMajor") %>
           <% section.with_item(url: devices_path + "#/admin/devices", label: "Equipamentos", icon: "AutomationMajor") %>
           <% section.with_item(url: screens_path + "#/admin/screens", label: "Telas", icon: "DesktopMajor") %>
-          <% section.with_item(url: attachments_path + "#/admin/attachments", label: "Mídias", icon: "ImageMajor") %>
+          <% section.with_item(url: attachments_path, label: "Mídias", icon: "ImageMajor") %>
           <% section.with_item(url: users_path + "#/admin/users", label: "Usuários", icon: "CustomersMajor") %>
         <% end %>
       <% end if Current.user   %>

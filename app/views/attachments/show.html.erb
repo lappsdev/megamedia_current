@@ -28,9 +28,18 @@
     <% end %>
   <% end %>
   <%= polaris_card(title: "Configurações de agendamento") do %>
-    <%= polaris_empty_state(
-    heading: "Função ainda não implementada",
-    image: "https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png",
-  ) %>
+    <%= form_with(model: @attachment, builder: Polaris::FormBuilder) do |form| %>
+      <%= polaris_form_layout do |form_layout| %>
+        <% form_layout.with_item do %>
+          <%= form.polaris_text_field(:schedule_started_at, label: "Iniciar veiculação em", type: :date,required: true) %>
+        <% end %>
+        <% form_layout.with_item do %>
+          <%= form.polaris_text_field(:schedule_finished_at, label: "Finalizar veiculação em", type: :date, required: true) %>
+        <% end %>
+        <% form_layout.with_item do %>
+          <%= polaris_button(submit: true, primary: true) { "Alterar" } %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

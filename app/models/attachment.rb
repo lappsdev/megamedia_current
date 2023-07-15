@@ -8,29 +8,22 @@ class Attachment < ApplicationRecord
   validates :file, presence: true
   belongs_to :group
   has_many :medias, dependent: :destroy
-
+  has_many :attachables, through: :medias
   delegate :image?, to: :file
   delegate :video?, to: :file
   after_create_commit :process_video
   attr_accessor :attachable_id, :attachable_type
 
-  before_save :set_attach_type
   before_create :set_name
   scope :expired, -> { where('expired_at < ?', Time.now) }
   def expired?
     !!(expired_at && Time.now.after?(expired_at))
   end
-
+  def attached_in
+    self.medias.map {|media| media.attachable}
+  end
   def process_video
     ConvertVideoAttachmentWorker.perform_async(id) if file.attached? && file.video?
-  end
-
-  def set_attach_type
-    if file.image?
-      self.attach_type = 'image'
-    elsif file.video?
-      self.attach_type = 'video'
-    end
   end
 
   private

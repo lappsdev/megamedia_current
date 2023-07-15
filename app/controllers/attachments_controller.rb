@@ -1,4 +1,5 @@
 class AttachmentsController < ApplicationController
+  before_action :set_attachment, except: [:index, :new, :create]
   def index
     respond_to do |format|
       format.html{ @attachments = Current.user.group.attachments.order(created_at: :desc)}
@@ -23,7 +24,7 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    attachment = Attachment.new(params.require(:attachment).permit(:file))
+    attachment = Attachment.new(attachment_params)
     attachment.group = Current.user.group
     if attachment.save
       respond_to do |format|
@@ -39,19 +40,29 @@ class AttachmentsController < ApplicationController
   end
 
   def update
-    attachment = AttachmentResource.find(params)
+    respond_to do |format|
+      format.html {
+        if @attachment.update(attachment_params)
+          redirect_to attachment_url(@attachment), notice: 'Mídia atualizada com sucesso!'
+        end
+      }
+      format.jsonapi{     
+        attachment = AttachmentResource.find(params)
 
-    if attachment.update_attributes
-      render jsonapi: attachment
-    else
-      render jsonapi_errors: attachment
+        if attachment.update_attributes
+          render jsonapi: attachment
+        else
+          render jsonapi_errors: attachment
+        end
+      }
     end
+
+
   end
 
   def destroy
     respond_to do |format|
       format.html { 
-        @attachment = Attachment.find(params[:id])
         if @attachment.destroy
           redirect_to attachments_url, notice: 'Mídia excluída com sucesso!' 
         else
@@ -71,5 +82,13 @@ class AttachmentsController < ApplicationController
     end
 
    
+  end
+
+  private 
+  def set_attachment
+    @attachment = Attachment.find(params[:id])
+  end
+  def attachment_params
+    params.require(:attachment).permit!
   end
 end

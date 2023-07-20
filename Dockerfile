@@ -53,6 +53,7 @@ ENV RACK_ENV='production'
 
 EXPOSE 5000
 ARG SECRET_KEY_BASE=fakekeyforassets
+RUN touch /varejo4tech/log/production.log
 RUN bundle exec rails assets:precompile && rails webpacker:compile
 #RUN bundle exec rake db:migrate
 RUN cd; cd -

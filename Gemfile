@@ -1,32 +1,30 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.0'
-gem 'rails', '~> 6.1'
-gem 'rails-i18n', '~> 6.0.0'
-gem 'webpacker', '~>5.0'
-gem 'turbo-rails'
+gem 'active_data'
 gem 'attr_json'
+gem 'authentication-zero', '~> 2.16'
 gem 'aws-sdk-s3', '~> 1'
+gem 'bcrypt', '~> 3.1.7'
+gem 'ice_cube'
 gem 'jbuilder', '~> 2.7'
 gem 'jwt'
 gem 'kaminari'
 gem 'money-rails', '~>1.12'
 gem 'net-ssh'
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'puma', '~> 5.0'
+gem 'rails', '~> 6.1'
+gem 'rails-i18n', '~> 6.0.0'
+gem 'redis', '~> 5.0'
 gem 'responders'
 gem 'sambal'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'stimulus-rails'
 gem 'store_base_sti_class'
-# Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 5.0'
-# Use Active Model has_secure_password
-gem 'active_data'
-gem 'authentication-zero', '~> 2.16'
-
-gem 'bcrypt', '~> 3.1.7'
+gem 'turbo-rails'
+gem 'webpacker', '~>5.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

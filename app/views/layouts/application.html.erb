@@ -15,9 +15,13 @@
     <script>
       localStorage.setItem("token", "<%= @json_web_token%>");
     </script>
-    <%= polaris_frame do |frame| %>
+    <%= polaris_frame(  logo: {
+    url: "/",
+    src: "/logo.png",
+    width: "200px"
+  }) do |frame| %>
       <% frame.with_top_bar do |top_bar| %>
-        <% top_bar.with_user_menu(name: Current.user.name, detail: "") do |user_menu| %>
+        <% top_bar.with_user_menu(name: Current.user.name, detail: Current.user.group.name) do |user_menu| %>
           <% user_menu.with_avatar(initials: Current.user.name[0]) %>
           <%= polaris_action_list do |action_list| %>
             <% action_list.with_item(icon: "LogOutMinor", url: session_path(Current.session), data: {turbo: "true", method: :delete,  "turbo-method": :delete }) { "Sair" } %>

@@ -163,6 +163,7 @@ GEM
     htmlbeautifier (1.4.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    ice_cube (0.16.4)
     jaro_winkler (1.5.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -443,6 +444,7 @@ DEPENDENCIES
   graphiti-rails
   graphiti_spec_helpers
   htmlbeautifier
+  ice_cube
   jbuilder (~> 2.7)
   jwt
   kaminari

@@ -34,7 +34,8 @@ RUN apt-get update -yqq && apt-get install -yq --no-install-recommends \
     cron \
     ca-certificates
 RUN mkdir /varejo4tech
-
+RUN sed -i 's/^\[global\]/\[global\]\nclient max protocol = SMB3/' /etc/samba/smb.conf 
+RUN sed -i 's/^\[global\]/\[global\]\nclient min protocol = CORE/' /etc/samba/smb.conf 
 COPY Gemfile /varejo4tech/Gemfile
 COPY Gemfile.lock /varejo4tech/Gemfile.lock
 COPY . /varejo4tech

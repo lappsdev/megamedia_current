@@ -1,4 +1,4 @@
-FROM ruby:2.7
+FROM ruby:3.2.2
 
 ENV NODE_VERSION=16.20.1
 RUN apt install -y curl

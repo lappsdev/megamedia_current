@@ -17,7 +17,8 @@ module JsonTypes
                                   share: share,
                                   user: user,
                                   pass: password,
-                                  port: port)
+                                  port: port,
+                                  configfile: '/etc/samba/smb.conf')
       client.cd(path_to_cd) if path_to_cd
       client
     end

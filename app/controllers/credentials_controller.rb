@@ -7,7 +7,13 @@ class CredentialsController < ApplicationController
       params[:data][:attributes][:ip] = @ip
 
     end
-
+    if jwt
+      credential = Credential.load(jwt)
+      @json_web_token = credential.json_web_token
+      Current.device = credential.device
+      params[:data][:attributes] = {}
+      params[:data][:attributes][:ip] = Current.device.ip
+    end
     credential = CredentialResource.build(params)
 
     if credential.save

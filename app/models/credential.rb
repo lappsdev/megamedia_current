@@ -1,10 +1,7 @@
 class Credential
   include ActiveModel::Model
 
-  attr_accessor :user
-  attr_accessor :device
-
-  attr_accessor :login, :json_web_token, :password, :ip
+  attr_accessor :user, :device, :login, :json_web_token, :password, :ip
 
   class << self
     def secret
@@ -13,10 +10,10 @@ class Credential
 
     def load(jwt)
       decoded = JWT.decode(jwt, secret, true, { algorithm: 'HS256' }).first
-
-      if user = User.find(decoded['data']['user_id'])
+      p decoded
+      if user = User.find_by_id(decoded['data']['user_id'])
         new(user: user)
-      elsif device = Device.find(decoded['data']['device_id'])
+      elsif device = Device.find_by_id(decoded['data']['device_id'])
         new(device: device)
       end
     rescue JWT::ExpiredSignature

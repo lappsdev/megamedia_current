@@ -4,7 +4,7 @@ class CredentialsController < ApplicationController
   def create
     unless params[:data].key?(:attributes) && params[:data][:attributes].key?(:login)
       params[:data][:attributes] = {}
-      params[:data][:attributes][:ip] = request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
+      params[:data][:attributes][:ip] = @ip
 
     end
 

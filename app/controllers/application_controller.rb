@@ -2,24 +2,27 @@ class ApplicationController < ActionController::Base
   include Graphiti::Rails
   include Graphiti::Responders
   skip_before_action :verify_authenticity_token
+  before_action :set_ip
   before_action :set_current_request_details
   before_action :authenticate
   before_action :determine_format
 
   private
 
+  def set_ip
+    @ip = params[:ip] || request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
+  end
+
   def authenticate
-    ip = request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
-    @ip = ip
     if session_record = Session.find_by_id(cookies.signed[:session_token])
       Current.session = session_record
       credential = Credential.create({ login: Current.session.user.login, password: 'teste123123' }).tap do |c|
         c.mint_jwt! if c.errors.blank?
       end
       @json_web_token = credential.json_web_token
-    elsif device = Device.find_by(ip: ip)
+    elsif device = Device.find_by(ip: @ip)
       Current.device = device
-      credential = Credential.create({ ip: ip }).tap do |c|
+      credential = Credential.create({ ip: @ip }).tap do |c|
         c.mint_jwt! if c.errors.blank?
       end
       @json_web_token = credential.json_web_token

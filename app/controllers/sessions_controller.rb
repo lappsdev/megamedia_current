@@ -7,9 +7,14 @@ class SessionsController < ApplicationController
     @sessions = Current.user.sessions.order(created_at: :desc)
   end
 
-  def new; end
+  def new
+    ip = request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
+    @ip = ip
+  end
 
   def create
+    ip = request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
+    @ip = ip
     user = User.find_by(login: params[:login])
 
     if user && user.authenticate(params[:password])

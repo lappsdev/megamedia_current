@@ -7,33 +7,33 @@ class ApplicationController < ActionController::Base
   before_action :determine_format
 
   private
-    def authenticate
-      ip = request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
-      if session_record = Session.find_by_id(cookies.signed[:session_token])
-        Current.session = session_record
-        credential = Credential.create({login: Current.session.user.login, password: "teste123123"}).tap do |c|
-          c.mint_jwt! if c.errors.blank?
-        end
-        @json_web_token = credential.json_web_token
-      elsif device = Device.find_by(ip: ip)
-        Current.device = device
-        credential = Credential.create({ip: ip}).tap do |c|
-          c.mint_jwt! if c.errors.blank?
-        end
-        @json_web_token = credential.json_web_token
-      else
-        redirect_to sign_in_path
+
+  def authenticate
+    ip = request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
+    @ip = ip
+    if session_record = Session.find_by_id(cookies.signed[:session_token])
+      Current.session = session_record
+      credential = Credential.create({ login: Current.session.user.login, password: 'teste123123' }).tap do |c|
+        c.mint_jwt! if c.errors.blank?
       end
+      @json_web_token = credential.json_web_token
+    elsif device = Device.find_by(ip: ip)
+      Current.device = device
+      credential = Credential.create({ ip: ip }).tap do |c|
+        c.mint_jwt! if c.errors.blank?
+      end
+      @json_web_token = credential.json_web_token
+    else
+      redirect_to sign_in_path
     end
+  end
 
-    def set_current_request_details
-      Current.user_agent = request.user_agent
-      Current.ip_address = request.ip
-    end
+  def set_current_request_details
+    Current.user_agent = request.user_agent
+    Current.ip_address = request.ip
+  end
 
-    def determine_format
-      request.format = :jsonapi if (request.format == 'application/vnd.api+json')
-    end
-
-  
+  def determine_format
+    request.format = :jsonapi if request.format == 'application/vnd.api+json'
+  end
 end

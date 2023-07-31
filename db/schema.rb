@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_15_033158) do
+ActiveRecord::Schema.define(version: 2023_07_30_022050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 2023_07_15_033158) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.bigint "unit_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["unit_id"], name: "index_departments_on_unit_id"
   end
 
   create_table "devices", force: :cascade do |t|
@@ -185,6 +193,7 @@ ActiveRecord::Schema.define(version: 2023_07_15_033158) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attachments", "groups"
+  add_foreign_key "departments", "units"
   add_foreign_key "devices", "units"
   add_foreign_key "medias", "attachments"
   add_foreign_key "price_checks", "widgets"

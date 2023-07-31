@@ -6,6 +6,7 @@ class Unit < ApplicationRecord
   attr_json :wrpdv_settings, JsonTypes::WrpdvSettings.to_type
   belongs_to :group
   has_many :devices
+  has_many :departments
   def flex_connection
     flex_settings.postgres_connection
   end

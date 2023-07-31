@@ -1,0 +1,15 @@
+<%= polaris_page(
+  title: "Editar departamento #{@department.name}",
+  subtitle: "Unidade: #{@department.unit.name}",
+  back_url: department_url(@department),
+
+  secondary_actions: [
+    { content: "Excluir", url: department_path(@department), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <div>
+    <%= polaris_card(title: "Informações") do %>
+      <%= render 'form', department: @department %>
+    <% end %>
+  </div>
+<% end %>

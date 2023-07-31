@@ -1,0 +1,20 @@
+<%= form_with(model: (!department.persisted? && unit) ? [unit, department] : department, builder: Polaris::FormBuilder) do |form| %>
+  <%= form.errors_summary %>
+  <%= polaris_form_layout do |form_layout| %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_select(:unit_id, 
+    label: "Unidade", 
+    options: Unit.all.map {|unit| [unit.name, unit.id]}.to_h,
+    required: true, 
+    selected: unit&.id.to_s,
+    disabled: unit.present?
+) if !department.persisted?%>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:name,  label: "Nome do departamento", required: true) %>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= polaris_button(submit: true, primary: true) { department.persisted? ? "Alterar" : "Cadastrar" } %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,20 @@
+  <%= polaris_resource_list do |resource_list| %>
+  <% resource_list.with_filters(disabled: true,
+      help_text: "Em desenvolvimento.") do |filters| %>
+    <% filters.with_query(name: :query, placeholder: "Filtrar departamentos") %>
+  <% end %>
+  <% if departments.present? %>
+    <% departments.each do |department| %>
+      <%= polaris_resource_item(url: department_path(department)) do |c| %>
+        <h3>
+          <%= polaris_text_style(variation: :strong) { department.name } %>
+        </h3>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= polaris_empty_search_results(
+    title: "Nenhum departamento encontrado",
+    description: "Cadastre um novo departamento ou ajuste os critérios de busca."
+  ) %>
+  <% end %>
+<% end%>

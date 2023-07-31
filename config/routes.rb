@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   mount ActionCable.server => '/cable'
   mount VandalUi::Engine, at: '/vandal'
-  resources :units
+  resources :units do
+    resources :departments, only: %i[create new]
+  end
+  resources :departments
+
   resources :devices
   resources :screens
   resources :users

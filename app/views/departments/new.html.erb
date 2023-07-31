@@ -1,0 +1,11 @@
+<%= polaris_page(
+  title: "Novo departamento",
+  subtitle: @unit ? "Unidade: #{@unit.name} #{@unit.id}" : nil,
+  back_url: @unit ? unit_url(@unit) : departments_url) do |page| %>
+  <% page.with_primary_action(url: new_department_url) { "Cadastrar de outra unidade" } if @unit %>
+  <div>
+    <%= polaris_card(title: "Informações") do %>
+      <%= render 'form', department: @department, unit: @unit%>
+    <% end %>
+  </div>
+<% end %>

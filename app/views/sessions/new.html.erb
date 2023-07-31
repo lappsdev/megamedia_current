@@ -9,7 +9,6 @@
       <p>
         <p style="color: green"><%= notice %></p>
         <p style="color: red"><%= alert %></p>
-        <p>IP: <%= @ip %></p>
         <%= form_with(url: sign_in_path, builder: Polaris::FormBuilder) do |form| %>
           <%= polaris_form_layout do |form_layout| %>
             <% form_layout.with_item do %>

@@ -1,3 +1,86 @@
-<div id="app">
-  <app></app>
-</div>
+<%= polaris_page(
+  title: @unit.name,
+  subtitle: "Grupo: #{@unit.group.name}",
+  back_url: "/units",
+
+  secondary_actions: [
+    { content: "Excluir", url: unit_path(@unit), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <% page.with_primary_action(disabled: true) { "Editar" } %>
+  <%= polaris_horizontal_grid(gap: "4", columns: %i[twoThirds oneThird ]) do %>
+    <div>
+      <%= polaris_card(title: "Informações") do %>
+        <%= polaris_description_list do |list| %>
+          <% list.with_item(term: "Nome") do %>
+            <%= @unit.name %>
+          <% end %>
+          <% list.with_item(term: "Grupo") do %>
+            <%= @unit.group.name %>
+          <% end %>
+          <% list.with_item(term: "Data de cadastro") do %>
+            <%= @unit.created_at.strftime("%d/%m/%Y às %H:%M:%S")%>
+          <% end %>
+          <% list.with_item(term: "Data da última atualização") do %>
+            <%= @unit.updated_at.strftime("%d/%m/%Y às %H:%M:%S") %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= polaris_card(title: "Configurações WRPDV") do %>
+        <%= form_with(model: @unit, builder: Polaris::FormBuilder) do |form| %>
+          <% form.fields_for :wrpdv_settings do |wrpdv_settings_form| %>
+            <%= polaris_form_layout do |form_layout| %>
+              <% form_layout.with_item do %>
+                <%= wrpdv_settings_form.polaris_text_field(:pdvlivre_path, value: @unit.wrpdv_settings.pdvlivre_path, label: "URL completa do PDVLivre", clear_button: true) %>
+              <% end %>
+              <% form_layout.with_item do %>
+                <%= polaris_button(submit: true, primary: true) { "Alterar" } %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= polaris_card(title: "Configurações FLEX") do %>
+        <%= form_with(model: @unit, builder: Polaris::FormBuilder) do |form| %>
+          <% form.fields_for :flex_settings do |flex_settings_form| %>
+            <%= polaris_form_layout do |form_layout| %>
+              <% form_layout.with_item do %>
+                <%= flex_settings_form.polaris_text_field(:db_host, value: @unit.flex_settings.db_host, label: "Host do banco de dados", clear_button: true) %>
+              <% end %>
+              <% form_layout.with_item do %>
+                <%= flex_settings_form.polaris_text_field(:db_port, value: @unit.flex_settings.db_port, label: "Porta do banco de dados", clear_button: true) %>
+              <% end %>
+              <% form_layout.with_item do %>
+                <%= flex_settings_form.polaris_text_field(:db_user, value: @unit.flex_settings.db_user, label: "Usuário do banco de dados", clear_button: true) %>
+              <% end %>
+              <% form_layout.with_item do %>
+                <%= flex_settings_form.polaris_text_field(:db_password, value: @unit.flex_settings.db_password, label: "Senha do banco de dados", clear_button: true) %>
+              <% end %>
+              <% form_layout.with_item do %>
+                <%= flex_settings_form.polaris_text_field(:db_name, value: @unit.flex_settings.db_name, label: "Nome do banco de dados", clear_button: true) %>
+              <% end %>
+              <% form_layout.with_item do %>
+                <%= flex_settings_form.polaris_text_field(:unit_code, value: @unit.flex_settings.unit_code, label: "Código da unidade", clear_button: true) %>
+              <% end %>
+              <% form_layout.with_item do %>
+                <%= polaris_button(submit: true, primary: true) { "Alterar" } %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+      <%= polaris_card(title: "Departamentos") do |card| %>
+        <%= render 'departments/list', departments: @unit.departments%>
+        <% card.with_primary_footer_action(url: new_unit_department_url(@unit)) { "Cadastrar novo" } %>
+        <% card.with_secondary_footer_action(url: "#", disabled: true) { "Ver todos" } %>
+      <% end %>
+      <%= polaris_card(title: "Equipamentos") do |card| %>
+        <%= render 'devices/list', devices: @unit.devices%>
+        <% card.with_primary_footer_action(url: "#") { "Cadastrar novo" } %>
+        <% card.with_secondary_footer_action(url: "#", disabled: true) { "Ver todos" } %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

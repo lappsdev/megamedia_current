@@ -1,0 +1,29 @@
+<%= polaris_page(
+  title: @department.name,
+  subtitle: "Unidade: #{@department.unit.name}",
+  back_url: unit_url(@department.unit),
+
+  secondary_actions: [
+    { content: "Excluir", url: department_path(@department), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <% page.with_primary_action(url: edit_department_url(@department)) { "Editar" } %>
+  <div>
+    <%= polaris_card(title: "Informações") do %>
+      <%= polaris_description_list do |list| %>
+        <% list.with_item(term: "Nome") do %>
+          <%= @department.name %>
+        <% end %>
+        <% list.with_item(term: "Unidade") do %>
+          <%= link_to @department.unit.name, @department.unit  %>
+        <% end %>
+        <% list.with_item(term: "Data de cadastro") do %>
+          <%= @department.created_at.strftime("%d/%m/%Y às %H:%M:%S")%>
+        <% end %>
+        <% list.with_item(term: "Data da última atualização") do %>
+          <%= @department.updated_at.strftime("%d/%m/%Y às %H:%M:%S") %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

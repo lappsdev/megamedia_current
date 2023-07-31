@@ -1,3 +1,8 @@
-<div id="app">
-  <app></app>
-</div>
+<%= polaris_page(
+  title: "Unidades",
+  compact_title: true,
+  back_url: "/#") do |page| %>
+  <%= polaris_card do %>
+    <% render 'list', units: @units%>
+  <% end %>
+<% end %>

@@ -1,9 +1,6 @@
 <template>
   <div style="width: 100%; height: 100%">
-    <img
-      :src="file"
-      style="position: absolute; width: 100%; max-height: 100%; top: 0; left: 0"
-    />
+    <img v-if="!expired" :src="file" style="position: absolute; width: 100%; max-height: 100%; top: 0; left: 0" />
   </div>
 </template>
 
@@ -17,9 +14,11 @@ export default {
     file() {
       return this.widget.attachment.file;
     },
+    expired() {
+      return this.widget.attachment.expired;
+    },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

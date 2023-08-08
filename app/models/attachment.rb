@@ -27,7 +27,15 @@ class Attachment < ApplicationRecord
   end
 
   def expired?
-    !!(expired_at && Time.now.after?(expired_at))
+    if schedule_started_at && schedule_finished_at
+      !Time.now.between?(schedule_started_at.beginning_of_day, schedule_finished_at.end_of_day)
+    elsif schedule_started_at && !schedule_finished_at
+      !Time.now.after?(schedule_started_at.beginning_of_day)
+    elsif !schedule_started_at && schedule_finished_at
+      !Time.now.before?(schedule_finished_at.beginning_of_day)
+    else
+      false
+    end
   end
 
   def attached_in

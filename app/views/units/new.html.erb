@@ -1,0 +1,8 @@
+<%= polaris_page(
+  title: "Nova unidade",
+  subtitle: "Grupo: #{Current.user.group.name}",
+  back_url: units_url) do |page| %>
+  <%= polaris_card(title: "Informações") do %>
+    <%= render 'form', unit: @unit%>
+  <% end %>
+<% end %>

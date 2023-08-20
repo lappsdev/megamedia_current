@@ -1,0 +1,27 @@
+<%= form_with(model: user, builder: Polaris::FormBuilder) do |form| %>
+  <%= form.errors_summary %>
+  <%= polaris_form_layout do |form_layout| %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_select(:role, 
+                            label: "Tipo de acesso", 
+                            options: {"Administrador" => :admin, "Marketing" => :marketing},
+                            required: true, 
+                            selected: :admin ) %>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:name,  label: "Nome", required: true) %>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:login,  label: "Login", required: true) %>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:password,  label: "Senha", type: :password, required: true) %>
+    <% end unless user.persisted? %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:password_confirmation,  label: "Confirme sua senha", type: :password, required: true) %>
+    <% end unless user.persisted? %>
+    <% form_layout.with_item do %>
+      <%= polaris_button(submit: true, primary: true) { user.persisted? ? "Alterar" : "Cadastrar" } %>
+    <% end %>
+  <% end %>
+<% end %>

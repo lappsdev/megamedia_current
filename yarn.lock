@@ -1329,6 +1329,11 @@
     webpack-cli "^3.3.12"
     webpack-sources "^1.4.3"
 
+"@turbo-boost/commands@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@turbo-boost/commands/-/commands-0.0.13.tgz#7ff4393ded1ea5dc486a07a6e37ee1ab94705e23"
+  integrity sha512-88hr/llVEYq5GagRoIyoZMYFfrVynhuiV+hWKbtrSfms8JL3Sa1uMARqnvDUk9rdGSN3xcMButsinzrSxG9OmA==
+
 "@types/actioncable@^5.2.3":
   version "5.2.7"
   resolved "https://registry.yarnpkg.com/@types/actioncable/-/actioncable-5.2.7.tgz#b42de922ba32f1a46c863df1ed32807ab08dda80"

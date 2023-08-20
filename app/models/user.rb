@@ -14,7 +14,5 @@ class User < ApplicationRecord
   }
   has_many :sessions, dependent: :destroy
 
-  validates :password, allow_nil: true, length: { minimum: 12 }
-
-
+  validates :password, allow_nil: true, length: { minimum: 4 }
 end

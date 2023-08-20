@@ -4,7 +4,15 @@ class DepartmentsController < ApplicationController
 
   # GET /departments or /departments.json
   def index
-    @departments = @unit&.departments || Department.all
+    respond_to do |format|
+      format.html do
+        @departments = @unit&.departments || Department.all
+      end
+      format.jsonapi do
+        departments = DepartmentResource.all(params)
+        respond_with(departments)
+      end
+    end
   end
 
   # GET /departments/1 or /departments/1.json
@@ -42,14 +50,21 @@ class DepartmentsController < ApplicationController
   # PATCH/PUT /departments/1 or /departments/1.json
   def update
     respond_to do |format|
-      if @department.update(department_params)
-        format.html { redirect_to department_url(@department), notice: 'Departamento atualizado com sucesso.' }
-        format.json { render :show, status: :ok, location: @department }
-      else
-        format.html do
+      format.jsonapi do
+        department = DepartmentResource.find(params)
+
+        if department.update_attributes
+          render jsonapi: department
+        else
+          render jsonapi_errors: department
+        end
+      end
+      format.html do
+        if @department.update(department_params)
+          redirect_to department_url(@department), notice: 'Departamento atualizado com sucesso.'
+        else
           render :edit, status: :unprocessable_entity
         end
-        format.json { render json: @department.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,7 +74,7 @@ class DepartmentsController < ApplicationController
     @department.destroy
 
     respond_to do |format|
-      format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
+      format.html { redirect_to unit_path(@department.unit), notice: 'Departamento excluído.' }
       format.json { head :no_content }
     end
   end

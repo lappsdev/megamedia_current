@@ -21,13 +21,30 @@ class UnitsController < ApplicationController
     end
   end
 
-  def create
-    unit = UnitResource.build(params)
+  def new
+    @unit = Current.user.group.units.build
+  end
 
-    if unit.save
-      render jsonapi: unit, status: 201
-    else
-      render jsonapi_errors: unit
+  def create
+    respond_to do |format|
+      format.html do
+        @unit = Current.user.group.units.build(unit_params)
+        if @unit.save
+          redirect_to unit_url(@unit), notice: 'Unidade cadastrada com sucesso.'
+        else
+          flash.now[:alert] = 'Erro ao cadastrar!'
+          render :new, status: :unprocessable_entity
+        end
+      end
+      format.jsonapi do
+        unit = UnitResource.build(params)
+
+        if unit.save
+          render jsonapi: unit, status: 201
+        else
+          render jsonapi_errors: unit
+        end
+      end
     end
   end
 
@@ -49,12 +66,20 @@ class UnitsController < ApplicationController
   end
 
   def destroy
-    unit = UnitResource.find(params)
+    respond_to do |format|
+      format.html do
+        @unit.destroy
+        redirect_to units_url, notice: 'Unidade excluída.'
+      end
+      format.jsonapi do
+        unit = UnitResource.find(params)
 
-    if unit.destroy
-      render jsonapi: { meta: {} }, status: 200
-    else
-      render jsonapi_errors: unit
+        if unit.destroy
+          render jsonapi: { meta: {} }, status: 200
+        else
+          render jsonapi_errors: unit
+        end
+      end
     end
   end
 

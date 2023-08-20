@@ -1,0 +1,57 @@
+<%= polaris_page(
+  title: @user.name,
+  subtitle: "Grupo: #{@user.group.name}",
+  back_url: "/users",
+
+  secondary_actions: [
+        { content: "Alterar senha", data: {turbo: true, controller: "polaris",action: "polaris#openModal",
+                                                       target: "#change-password-modal"},  },
+
+    { content: "Excluir", url: user_path(@user), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <% page.with_primary_action(url: edit_user_path(@user)) { "Editar" } %>
+  <%= polaris_card(title: "Informações") do %>
+    <%= polaris_description_list do |list| %>
+      <% list.with_item(term: "Nome") do %>
+        <%= @user.name %>
+      <% end %>
+      <% list.with_item(term: "Login") do %>
+        <%= @user.login %>
+      <% end %>
+      <% list.with_item(term: "Acesso") do %>
+        <%= @user.role %>
+      <% end %>
+      <% list.with_item(term: "Grupo") do %>
+        <%= @user.group.name %>
+      <% end %>
+      <% list.with_item(term: "Data de cadastro") do %>
+        <%= @user.created_at.strftime("%d/%m/%Y às %H:%M:%S")%>
+      <% end %>
+      <% list.with_item(term: "Data da última atualização") do %>
+        <%= @user.updated_at.strftime("%d/%m/%Y às %H:%M:%S") %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= form_with(model: @user, builder: Polaris::FormBuilder, data: {turbo: true}) do |form| %>
+  <%= polaris_modal(
+  id: "change-password-modal",
+  title: "Alterar senha do usuário #{@user.login}",
+  open: @modalStayOpened
+) do |modal| %>
+    <%= polaris_text_container do %>
+      <%= form.errors_summary %>
+      <%= polaris_form_layout do |form_layout| %>
+        <% form_layout.with_item do %>
+          <%= form.polaris_text_field(:password,  label: "Nova senha", required: true) %>
+        <% end %>
+        <% form_layout.with_item do %>
+          <%= form.polaris_text_field(:password_confirmation,  label: "Confirme a nova senha", required: true) %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% modal.with_primary_action(submit: true) { "Alterar" } %>
+    <% modal.with_secondary_action(data: { action: "polaris-modal#close" }) { "Cancelar" } %>
+  <% end %>
+<% end %>

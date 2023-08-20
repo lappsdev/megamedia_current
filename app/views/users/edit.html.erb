@@ -1,0 +1,15 @@
+<%= polaris_page(
+  title: "Editar usuário #{@user.name}",
+  subtitle: "Grupo: #{@user.group.name}",
+  back_url: user_url(@user),
+
+  secondary_actions: [
+    { content: "Excluir", url: user_url(@user), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <div>
+    <%= polaris_card(title: "Informações") do %>
+      <%= render 'form', user: @user %>
+    <% end %>
+  </div>
+<% end %>

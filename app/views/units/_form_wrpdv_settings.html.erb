@@ -1,0 +1,12 @@
+<%= form_with(model: unit, builder: Polaris::FormBuilder) do |form| %>
+  <% form.fields_for :wrpdv_settings do |wrpdv_settings_form| %>
+    <%= polaris_form_layout do |form_layout| %>
+      <% form_layout.with_item do %>
+        <%= wrpdv_settings_form.polaris_text_field(:pdvlivre_path, value: unit.wrpdv_settings.pdvlivre_path, label: "URL completa do PDVLivre", clear_button: true) %>
+      <% end %>
+      <% form_layout.with_item do %>
+        <%= polaris_button(submit: true, primary: true) { "Alterar" } %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

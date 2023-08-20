@@ -23,6 +23,7 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'stimulus-rails'
 gem 'store_base_sti_class'
+gem 'turbo_boost-commands'
 gem 'turbo-rails'
 gem 'webpacker', '~>5.0'
 

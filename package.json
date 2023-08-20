@@ -8,6 +8,7 @@
     "@mdi/font": "^5.8.55",
     "@rails/request.js": "^0.0.8",
     "@rails/webpacker": "5.4.4",
+    "@turbo-boost/commands": "^0.0.13",
     "actioncable-vue": "^2.3.2",
     "isomorphic-fetch": "^3.0.0",
     "polaris-view-components": "^1.0.0",

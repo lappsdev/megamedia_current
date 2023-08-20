@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_30_022050) do
+ActiveRecord::Schema.define(version: 2023_08_20_103512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 2023_07_30_022050) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.jsonb "json_attributes"
+    t.index ["json_attributes"], name: "index_departments_on_json_attributes", using: :gin
     t.index ["unit_id"], name: "index_departments_on_unit_id"
   end
 
@@ -89,7 +91,9 @@ ActiveRecord::Schema.define(version: 2023_07_30_022050) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
+    t.bigint "department_id"
     t.index ["data"], name: "index_devices_on_data", using: :gin
+    t.index ["department_id"], name: "index_devices_on_department_id"
     t.index ["unit_id"], name: "index_devices_on_unit_id"
   end
 
@@ -186,7 +190,9 @@ ActiveRecord::Schema.define(version: 2023_07_30_022050) do
     t.bigint "screen_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "department_id"
     t.index ["data"], name: "index_widgets_on_data", using: :gin
+    t.index ["department_id"], name: "index_widgets_on_department_id"
     t.index ["screen_id"], name: "index_widgets_on_screen_id"
   end
 
@@ -194,6 +200,7 @@ ActiveRecord::Schema.define(version: 2023_07_30_022050) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attachments", "groups"
   add_foreign_key "departments", "units"
+  add_foreign_key "devices", "departments"
   add_foreign_key "devices", "units"
   add_foreign_key "medias", "attachments"
   add_foreign_key "price_checks", "widgets"
@@ -201,5 +208,6 @@ ActiveRecord::Schema.define(version: 2023_07_30_022050) do
   add_foreign_key "screens", "groups"
   add_foreign_key "units", "groups"
   add_foreign_key "users", "groups"
+  add_foreign_key "widgets", "departments"
   add_foreign_key "widgets", "screens"
 end

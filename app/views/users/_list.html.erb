@@ -1,0 +1,28 @@
+  <%= form_with(url: users_path, method: :get, data: {turbo: true, turbo_command: "UserCommand#search", turbo_frame: "batata" }) do %>
+  <%= polaris_filters do |filters| %>
+    <% filters.with_query(name: :query, placeholder: "Filtrar usuários", autocomplete: false) %>
+    <div style="padding-left: 8px;">
+      <%= polaris_button(submit: true) { "Filtrar" } %>
+    </div>
+  <% end %>
+<% end %>
+<%= turbo_frame_tag "batata" do %>
+  <% if users.count > 0 %>
+    <%= polaris_resource_list do |resource_list| %>
+      <% users.each do |user| %>
+        <%= polaris_resource_item(url: user_path(user), data: {turbo: false}) do |c| %>
+          <h3>
+            <%= polaris_text_style(variation: :strong) { user.name } %>
+          </h3>
+          <div>Tipo: <%= user.role %></div>
+          <div>Login: <%= user.login %></div>
+        <% end %>
+      <% end %>
+    <% end%>
+  <% else %>
+    <%= polaris_empty_search_results(
+    title: "Nenhum usuário encontrado",
+    description: "Cadastre um novo usuário ou ajuste os critérios de busca."
+  ) %>
+  <% end %>
+<% end %>

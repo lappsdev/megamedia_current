@@ -1,0 +1,27 @@
+<%= form_with(model: unit, builder: Polaris::FormBuilder) do |form| %>
+  <% form.fields_for :flex_settings do |flex_settings_form| %>
+    <%= polaris_form_layout do |form_layout| %>
+      <% form_layout.with_item do %>
+        <%= flex_settings_form.polaris_text_field(:db_host, value: unit.flex_settings.db_host, label: "Host do banco de dados", clear_button: true) %>
+      <% end %>
+      <% form_layout.with_item do %>
+        <%= flex_settings_form.polaris_text_field(:db_port, value: unit.flex_settings.db_port, label: "Porta do banco de dados", clear_button: true) %>
+      <% end %>
+      <% form_layout.with_item do %>
+        <%= flex_settings_form.polaris_text_field(:db_user, value: unit.flex_settings.db_user, label: "Usuário do banco de dados", clear_button: true) %>
+      <% end %>
+      <% form_layout.with_item do %>
+        <%= flex_settings_form.polaris_text_field(:db_password, value: unit.flex_settings.db_password, label: "Senha do banco de dados", clear_button: true) %>
+      <% end %>
+      <% form_layout.with_item do %>
+        <%= flex_settings_form.polaris_text_field(:db_name, value: unit.flex_settings.db_name, label: "Nome do banco de dados", clear_button: true) %>
+      <% end %>
+      <% form_layout.with_item do %>
+        <%= flex_settings_form.polaris_text_field(:unit_code, value: unit.flex_settings.unit_code, label: "Código da unidade", clear_button: true) %>
+      <% end %>
+      <% form_layout.with_item do %>
+        <%= polaris_button(submit: true, primary: true) { "Alterar" } %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -27,6 +27,8 @@ class Attachment < ApplicationRecord
   end
 
   def expired?
+    return true unless weekdays[Time.now.wday]
+
     if schedule_started_at && schedule_finished_at
       !Time.now.between?(schedule_started_at.beginning_of_day, schedule_finished_at.end_of_day)
     elsif schedule_started_at && !schedule_finished_at

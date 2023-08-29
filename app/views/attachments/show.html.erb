@@ -25,6 +25,10 @@
       <% list.with_item(term: "Data de upload") do %>
         <%= @attachment.created_at.strftime("%d/%m/%Y às %H:%M:%S") %>
       <% end %>
+      <% list.with_item(term: "Vigência") do %>
+        <%= polaris_badge(status: :success) { "Mídia em exibição" } if !@attachment.expired? %>
+        <%= polaris_badge(status: :critical) { "Mídia expirada" } if @attachment.expired? %>
+      <% end %>
     <% end %>
   <% end %>
   <%= polaris_card(title: "Configurações de agendamento") do %>
@@ -35,6 +39,15 @@
         <% end %>
         <% form_layout.with_item do %>
           <%= form.polaris_text_field(:schedule_finished_at, label: "Finalizar veiculação em", type: :date, required: true) %>
+        <% end %>
+        <% form_layout.with_item do %>
+          <%= form.polaris_check_box("weekdays[1]",  label: "Segunda-feira",checked: @attachment.weekdays[1]) %>
+          <%= form.polaris_check_box("weekdays[2]",  label: "Terça-feira",checked: @attachment.weekdays[2]) %>
+          <%= form.polaris_check_box("weekdays[3]", label: "Quarta-feira",checked: @attachment.weekdays[3]) %>
+          <%= form.polaris_check_box("weekdays[4]", label: "Quinta-feira",checked: @attachment.weekdays[4]) %>
+          <%= form.polaris_check_box("weekdays[5]",  label: "Sexta-feira",checked: @attachment.weekdays[5]) %>
+          <%= form.polaris_check_box("weekdays[6]", label: "Sábado",checked: @attachment.weekdays[6]) %>
+          <%= form.polaris_check_box("weekdays[0]",  label: "Domingo", checked: @attachment.weekdays[0]) %>
         <% end %>
         <% form_layout.with_item do %>
           <%= polaris_button(submit: true, primary: true) { "Alterar" } %>

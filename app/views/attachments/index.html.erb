@@ -28,6 +28,10 @@
           </h3>
           <div>Nome do arquivo: <%= attachment.file.filename %></div>
           <div><%= polaris_text_style(variation: :subdued) { "Data de upload: #{attachment.created_at.strftime("%d/%m/%Y")}" } %></div>
+          <div>
+            <%= polaris_badge(status: :success) { "Mídia em exibição" } if !attachment.expired? %>
+            <%= polaris_badge(status: :critical) { "Mídia expirada" } if attachment.expired? %>
+          </div>
         <% end %>
       <% end %>
     <% end %>

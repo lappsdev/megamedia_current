@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   mount VandalUi::Engine, at: '/vandal'
   resources :units do
+    resources :devices, only: %i[create new]
     resources :departments, only: %i[create new]
   end
   resources :departments
@@ -43,6 +44,7 @@ Rails.application.routes.draw do
     resources :units
     resources :groups
     resources :credentials
+    resources :departments
 
     # your routes go here
   end

@@ -3,23 +3,15 @@
     <v-dialog v-if="newWidget.dialog" v-model="newWidget.dialog" width="800">
       <v-card>
         <v-toolbar flat color="primary" dark>
-          <v-toolbar-title
-            >Nova widget {{ newWidget.type.name }}</v-toolbar-title
-          >
+          <v-toolbar-title>Nova widget {{ newWidget.type.name }}</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-card-text>
-          <Form
-            :model="newWidget.type.model"
-            :schema="newWidget.type.model.getFormSchema()"
-            :save="
-              () =>
-                newWidget.type.model.save({
-                  with: ['screen', 'attachment'],
-                })
-            "
-            @success="onCreatedWidget"
-          ></Form>
+          <Form :model="newWidget.type.model" :schema="newWidget.type.model.getFormSchema()" :save="() =>
+            newWidget.type.model.save({
+              with: ['screen', 'attachment', 'department'],
+            })
+            " @success="onCreatedWidget"></Form>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -30,15 +22,10 @@
           <v-icon color="primary">mdi-monitor</v-icon>
         </v-btn>
         <v-toolbar-title color="primary">
-          <v-edit-dialog @save="saveScreen" :return-value.sync="screen.name"
-            >Tela {{ screen.name }} <v-icon>mdi-pencil</v-icon>
+          <v-edit-dialog @save="saveScreen" :return-value.sync="screen.name">Tela {{ screen.name }}
+            <v-icon>mdi-pencil</v-icon>
             <template v-slot:input>
-              <v-text-field
-                v-model="screen.name"
-                label="Editar"
-                single-line
-                counter
-              ></v-text-field>
+              <v-text-field v-model="screen.name" label="Editar" single-line counter></v-text-field>
             </template>
           </v-edit-dialog>
         </v-toolbar-title>
@@ -54,11 +41,7 @@
           </template>
 
           <v-list>
-            <v-list-item
-              v-for="(type, i) in widgetTypes"
-              :key="i"
-              @click="createWidget(type)"
-            >
+            <v-list-item v-for="(type, i) in widgetTypes" :key="i" @click="createWidget(type)">
               <v-list-item-title>{{ type.name }}</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -69,36 +52,13 @@
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <grid-layout
-          :layout.sync="layout"
-          :col-num="12"
-          :row-height="50"
-          :is-draggable="true"
-          :is-resizable="true"
-          :is-mirrored="false"
-          :vertical-compact="false"
-          :maxRows="12"
-          :margin="[5, 5]"
-          :use-css-transforms="true"
-        >
-          <grid-item
-            v-for="item in layout"
-            :x="item.x"
-            :y="item.y"
-            :w="item.w"
-            :h="item.h"
-            :i="item.i"
-            :key="item.i"
-            @moved="movedEvent"
-            @resized="resizedEvent"
-          >
+        <grid-layout :layout.sync="layout" :col-num="12" :row-height="50" :is-draggable="true" :is-resizable="true"
+          :is-mirrored="false" :vertical-compact="false" :maxRows="12" :margin="[5, 5]" :use-css-transforms="true">
+          <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i"
+            @moved="movedEvent" @resized="resizedEvent">
             <div class="grid-item-container">
-              <WidgetComponent
-                :instance="item.instance"
-                editable
-                @edited="onEditedWidget(item.instance)"
-                @deleted="onDeletedWidget(item.instance)"
-              ></WidgetComponent>
+              <WidgetComponent :instance="item.instance" editable @edited="onEditedWidget(item.instance)"
+                @deleted="onDeletedWidget(item.instance)"></WidgetComponent>
             </div>
           </grid-item>
         </grid-layout>
@@ -277,7 +237,7 @@ export default {
     reloadScreen() {
       this.layout = [];
       this.screen = null;
-      Screen.includes(["widgets", "widgets.attachment"])
+      Screen.includes(["widgets.screen", "widgets.attachment", "device", "widgets.department"])
         .find(this.id)
         .then((response) => {
           this.screen = response.data;
@@ -302,11 +262,11 @@ export default {
       connected() {
         console.log("Websocket conectado.");
       },
-      rejected() {},
+      rejected() { },
       received(data) {
         console.log(data);
       },
-      disconnected() {},
+      disconnected() { },
     },
   },
 

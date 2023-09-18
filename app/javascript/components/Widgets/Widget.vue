@@ -8,12 +8,8 @@
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
-            <Form
-              :model="instance"
-              :schema="instance.getFormSchema()"
-              :save="() => instance.save({ with: 'attachment' })"
-              @success="edited"
-            ></Form>
+            <Form :model="instance" :schema="instance.getFormSchema()"
+              :save="() => instance.save({ with: ['attachment', 'department'] })" @success="edited"></Form>
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -33,11 +29,7 @@
         </v-btn>
       </v-speed-dial>
     </template>
-    <component
-      :is="componentFile"
-      :widget="instance"
-      :running="!editable"
-    ></component>
+    <component :is="componentFile" :widget="instance" :running="!editable"></component>
   </div>
 </template>
 
@@ -91,5 +83,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

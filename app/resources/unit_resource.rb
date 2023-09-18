@@ -6,6 +6,8 @@ class UnitResource < ApplicationResource
   attribute :notes, :string
 
   has_many :devices
+  has_many :departments
+
   filter :group_id, :integer
 
   belongs_to :group

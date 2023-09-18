@@ -14,6 +14,8 @@
 
 <script>
 export default {
+  props: { widget: {} },
+
   data() {
     return {
       currentPassword: 1,
@@ -26,6 +28,10 @@ export default {
       if (!this.calling) {
         this.calling = true;
         this.currentPassword = number;
+        if (this.widget.department) {
+          this.widget.department.queueIndex = this.currentPassword
+          this.widget.department.save().then(success => true)
+        }
         let file = require(`sounds/dingdong.mp3`);
         let audio = new Audio(file);
         audio.addEventListener("ended", () => {
@@ -66,6 +72,11 @@ export default {
   mounted() {
     window.addEventListener("keydown", this.addToBuffer);
   },
+  created() {
+    if (this.widget.department && this.widget.department.queueIndex) {
+      this.currentPassword = parseInt(this.widget.department.queueIndex)
+    }
+  }
 };
 </script>
 
@@ -73,12 +84,15 @@ export default {
 .big-responsive-text {
   font-size: 28vmin;
 }
+
 .small-responsive-text {
   font-size: 5vmin;
 }
+
 .medium-responsive-text {
   font-size: 10vmin;
 }
+
 .normal-responsive-text {
   font-size: 10vmin;
 }

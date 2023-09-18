@@ -2,6 +2,7 @@ import { ApplicationRecord } from './application_record';
 import { attr, belongsTo, hasOne } from 'spraypaint'
 import { Unit } from './unit.model'
 import { Screen } from './screen.model'
+import { Department } from './department.model'
 
 export const Device = ApplicationRecord.extend({
     static: {
@@ -21,6 +22,8 @@ export const Device = ApplicationRecord.extend({
         ip: attr(),
         notes: attr(),
         unit: belongsTo({ type: Unit }),
+        department: belongsTo({ type: Department }),
+        departmentId: attr(),
         screen: hasOne({ type: Screen }),
         sshSettings: attr()
     },

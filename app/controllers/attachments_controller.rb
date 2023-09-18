@@ -39,7 +39,7 @@ class AttachmentsController < ApplicationController
   def update
     respond_to do |format|
       format.html do
-        if @attachment.update(attachment_params)
+        if @attachment.update(attachment_params_with_weekdays)
           redirect_to attachment_url(@attachment), notice: 'Mídia atualizada com sucesso!'
         end
       end
@@ -85,6 +85,9 @@ class AttachmentsController < ApplicationController
 
   def attachment_params
     params.require(:attachment).permit!
-          .tap { |param| param[:weekdays] = [].tap { |a| param[:weekdays].each { |k, v| a[k.to_i] = v } } }
+  end
+
+  def attachment_params_with_weekdays
+    attachment_params.tap { |param| param[:weekdays] = [].tap { |a| param[:weekdays].each { |k, v| a[k.to_i] = v } } }
   end
 end

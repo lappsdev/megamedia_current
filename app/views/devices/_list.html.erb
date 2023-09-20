@@ -1,0 +1,25 @@
+  <%= polaris_resource_list do |resource_list| %>
+  <% resource_list.with_filters(disabled: true,
+      help_text: "Em desenvolvimento.") do |filters| %>
+    <% filters.with_query(name: :query, placeholder: "Filtrar equipamentos") %>
+  <% end %>
+  <% if devices.present? %>
+    <% devices.each do |device| %>
+      <%= polaris_resource_item(url: device_path(device)) do |c| %>
+        <h3>
+          <%= polaris_text_style(variation: :strong) { device.name } %>
+        </h3>
+        <div>IP: <%= device.ip %></div>
+        <div>Unidade: <%= device.unit.name %></div>
+        <% if device.notes %>
+          <%= polaris_text_style(variation: :strong) { "OBS: #{device.notes}" } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= polaris_empty_search_results(
+    title: "Nenhum equipamento encontrado",
+    description: "Cadastre um novo equipamento ou ajuste os critérios de busca."
+  ) %>
+  <% end %>
+<% end%>

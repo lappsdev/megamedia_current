@@ -1,0 +1,8 @@
+<%= polaris_page(
+  title: "Novo equipamento",
+  subtitle: @unit ? "Unidade: #{@unit.name}" : nil ,
+  back_url: devices_url) do |page| %>
+  <%= polaris_card(title: "Informações") do %>
+    <%= render 'form', device: @device, unit: @unit%>
+  <% end %>
+<% end %>

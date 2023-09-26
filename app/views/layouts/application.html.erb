@@ -31,7 +31,7 @@
       <% end if Current.user %>
       <% frame.with_navigation do |navigation| %>
         <% navigation.with_section(title: "Varejo4Tech") do |section| %>
-          <% section.with_item(url: "#", label: "Tela inicial", icon: "HomeMinor") %>
+          <% section.with_item(url: "/", label: "Tela inicial", icon: "HomeMinor") %>
           <% section.with_item(url: units_path, label: "Unidades", icon: "BankMajor", data: {turbo: true}) %>
           <% section.with_item(url: devices_path+ "#/admin/devices", label: "Equipamentos", icon: "AutomationMajor") %>
           <% section.with_item(url: screens_path + "#/admin/screens", label: "Telas", icon: "DesktopMajor") %>

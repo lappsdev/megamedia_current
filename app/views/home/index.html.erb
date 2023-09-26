@@ -1,21 +1,27 @@
-<%= polaris_page(
+<% if Current.user %>
+  <%= polaris_page(
   title: "Dashboard",
   compact_title: true) do |page| %>
-  <%= polaris_layout do |layout| %>
-    <% layout.with_section(one_half: true) do %>
-      <%= polaris_card(title: "Equipamentos cadastrados", actions: [{ content: "Ver todos", url: devices_url }]) do  |card|%>
-        <%= polaris_display_text(size: :extra_large) { "#{Device.count}"} %>
+    <%= polaris_layout do |layout| %>
+      <% layout.with_section(one_half: true) do %>
+        <%= polaris_card(title: "Equipamentos cadastrados", actions: [{ content: "Ver todos", url: devices_url }]) do  |card|%>
+          <%= polaris_display_text(size: :extra_large) { "#{Device.count}"} %>
+        <% end %>
       <% end %>
-    <% end %>
-    <% layout.with_section(one_half: true) do %>
-      <%= polaris_card(title: "Mídias cadastradas", actions: [{ content: "Ver todas", url: attachments_url }]) do  |card|%>
-        <%= polaris_display_text(size: :extra_large) { "#{Attachment.count}"} %>
+      <% layout.with_section(one_half: true) do %>
+        <%= polaris_card(title: "Mídias cadastradas", actions: [{ content: "Ver todas", url: attachments_url }]) do  |card|%>
+          <%= polaris_display_text(size: :extra_large) { "#{Attachment.count}"} %>
+        <% end %>
       <% end %>
-    <% end %>
-    <% layout.with_section do %>
-      <%= polaris_card(title: "Unidades cadastradas", actions: [{ content: "Ver todas", url: units_url }]) do  |card|%>
-        <%= polaris_display_text(size: :extra_large) { "#{Unit.count}"} %>
+      <% layout.with_section do %>
+        <%= polaris_card(title: "Unidades cadastradas", actions: [{ content: "Ver todas", url: units_url }]) do  |card|%>
+          <%= polaris_display_text(size: :extra_large) { "#{Unit.count}"} %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
+<% else%>
+  <div id="app">
+    <app></app>
+  </div>
 <% end %>

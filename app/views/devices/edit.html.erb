@@ -1,0 +1,15 @@
+<%= polaris_page(
+  title: "Editar equipamento #{@device.name}",
+  subtitle: "Unidade: #{@device.unit.name}",
+  back_url: device_url(@device),
+
+  secondary_actions: [
+    { content: "Excluir", url: device_path(@device), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <div>
+    <%= polaris_card(title: "Informações") do %>
+      <%= render 'form', device: @device%>
+    <% end %>
+  </div>
+<% end %>

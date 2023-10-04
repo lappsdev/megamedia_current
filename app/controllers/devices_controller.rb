@@ -1,4 +1,6 @@
 class DevicesController < ApplicationController
+  before_action :set_device, only: %i[show edit update destroy]
+
   before_action :get_unit
 
   def index
@@ -16,8 +18,13 @@ class DevicesController < ApplicationController
   end
 
   def show
-    device = DeviceResource.find(params)
-    respond_with(device)
+    respond_to do |format|
+      format.html {}
+      format.jsonapi do
+        device = DeviceResource.find(params)
+        respond_with(device)
+      end
+    end
   end
 
   def create
@@ -47,12 +54,23 @@ class DevicesController < ApplicationController
   end
 
   def update
-    device = DeviceResource.find(params)
+    respond_to do |format|
+      format.html do
+        if @device.update(device_params)
+          redirect_to device_url(@device), notice: 'Equipameno atualizado com sucesso.'
+        else
+          render :edit, status: :unprocessable_entity
+        end
+      end
+      format.jsonapi do
+        device = DeviceResource.find(params)
 
-    if device.update_attributes
-      render jsonapi: device
-    else
-      render jsonapi_errors: device
+        if device.update_attributes
+          render jsonapi: device
+        else
+          render jsonapi_errors: device
+        end
+      end
     end
   end
 
@@ -67,6 +85,10 @@ class DevicesController < ApplicationController
   end
 
   private
+
+  def set_device
+    @device = Device.find(params[:id])
+  end
 
   def device_params
     params.require(:device).permit!

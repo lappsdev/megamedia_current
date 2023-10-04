@@ -1,0 +1,35 @@
+<%= polaris_page(
+  title: @device.name,
+  subtitle: "Unidade: #{@device.unit.name}",
+  back_url: devices_path,
+
+  secondary_actions: [
+    { content: "Excluir", url: device_path(@device), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <% page.with_primary_action(url: edit_device_url(@device)) { "Editar" } %>
+  <div>
+    <%= polaris_card(title: "Informações") do %>
+      <%= polaris_description_list do |list| %>
+        <% list.with_item(term: "Nome") do %>
+          <%= @device.name %>
+        <% end %>
+        <% list.with_item(term: "Unidade") do %>
+          <%= link_to @device.unit.name, @device.unit  %>
+        <% end %>
+        <% list.with_item(term: "IP") do %>
+          <%= @device.ip %>
+        <% end %>
+        <% list.with_item(term: "MAC ") do %>
+          <%= @device.mac %>
+        <% end %>
+        <% list.with_item(term: "Data de cadastro") do %>
+          <%= @device.created_at.strftime("%d/%m/%Y às %H:%M:%S")%>
+        <% end %>
+        <% list.with_item(term: "Data da última atualização") do %>
+          <%= @device.updated_at.strftime("%d/%m/%Y às %H:%M:%S") %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

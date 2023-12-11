@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :screens
   resources :users
   resources :attachments
+  resources :groups
 
   scope path: ApplicationResource.endpoint_namespace, defaults: { format: :jsonapi } do
     resources :schedulers

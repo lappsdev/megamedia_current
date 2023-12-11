@@ -1,0 +1,35 @@
+<%= polaris_page(
+  title: @group.name,
+) do |page| %>
+  <% page.with_primary_action(url: edit_group_url(@group), disabled: true) { "Editar" } %>
+  <%= polaris_layout do |layout| %>
+    <% layout.with_section do %>
+      <%= polaris_card(title: "Informações") do %>
+        <%= polaris_description_list do |list| %>
+          <% list.with_item(term: "Nome") do %>
+            <%= @group.name %>
+          <% end %>
+          <% list.with_item(term: "Data de cadastro") do %>
+            <%= @group.created_at.strftime("%d/%m/%Y às %H:%M:%S")%>
+          <% end %>
+          <% list.with_item(term: "Data da última atualização") do %>
+            <%= @group.updated_at.strftime("%d/%m/%Y às %H:%M:%S") %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= polaris_card(title: "Configurações RPINFO") do %>
+        <%= render 'form_rp_info_settings', group: @group %>
+      <% end %>
+    <% end %>
+    <% layout.with_section(secondary: true) do %>
+      <%= polaris_card(title: "Unidades") do |card| %>
+        <% card.with_primary_footer_action(url: "#", disabled: true) { "Cadastrar novo" } %>
+        <% card.with_secondary_footer_action(url: "#", disabled: true) { "Ver todos" } %>
+      <% end %>
+      <%= polaris_card(title: "Usuários") do |card| %>
+        <% card.with_primary_footer_action(url: "#", disabled: true) { "Cadastrar novo" } %>
+        <% card.with_secondary_footer_action(url: "#", disabled: true) { "Ver todos" } %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

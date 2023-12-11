@@ -1,0 +1,22 @@
+<%= form_with(model: group, builder: Polaris::FormBuilder) do |form| %>
+  <%= form.errors_summary %>
+  <%= polaris_form_layout do |form_layout| %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:rp_info_api_user,  label: "Usuário da API", required: true) %>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:rp_info_api_password,  label: "Senha da API") %>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:rp_info_api_endpoint,  label: "Endpoint da API") %>
+    <% end %>
+    <% form_layout.with_item do %>
+      <%= polaris_button(submit: true, primary: true) { group.persisted? ? "Alterar" : "Cadastrar" } %>
+      <% if group.can_connect_rp_info_api? %>
+        <%= polaris_badge(status: :success) { "Conexão estabelecida!" } %>
+      <% else %>
+        <%= polaris_badge(status: :critical) { "Conexão não estabelecida!" } %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

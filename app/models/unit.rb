@@ -7,7 +7,12 @@ class Unit < ApplicationRecord
   belongs_to :group
   has_many :devices
   has_many :departments
+  store_accessor :json_attributes, :cnpj
   def flex_connection
     flex_settings.postgres_connection
+  end
+
+  def rp_info_api
+    RpInfo::Api.new(unit: self)
   end
 end

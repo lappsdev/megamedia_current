@@ -1,34 +1,34 @@
 {
   "application.css": "/packs/css/application-62ac3132.css",
   "application.css.map": "/packs/css/application-62ac3132.css.map",
-  "application.js": "/packs/application-e751c1fd34e8837397fd.js",
-  "application.js.map": "/packs/application-e751c1fd34e8837397fd.js.map",
+  "application.js": "/packs/application-4a463d9b3503d35f621b.js",
+  "application.js.map": "/packs/application-4a463d9b3503d35f621b.js.map",
   "entrypoints": {
     "application": {
       "css": [
         "/packs/css/application-62ac3132.css"
       ],
       "js": [
-        "/packs/application-e751c1fd34e8837397fd.js"
+        "/packs/application-4a463d9b3503d35f621b.js"
       ],
       "css.map": [
         "/packs/css/application-62ac3132.css.map"
       ],
       "js.map": [
-        "/packs/application-e751c1fd34e8837397fd.js.map"
+        "/packs/application-4a463d9b3503d35f621b.js.map"
       ]
     },
     "hello_vue": {
       "js": [
-        "/packs/hello_vue-e751c1fd34e8837397fd.js"
+        "/packs/hello_vue-4a463d9b3503d35f621b.js"
       ],
       "js.map": [
-        "/packs/hello_vue-e751c1fd34e8837397fd.js.map"
+        "/packs/hello_vue-4a463d9b3503d35f621b.js.map"
       ]
     }
   },
-  "hello_vue.js": "/packs/hello_vue-e751c1fd34e8837397fd.js",
-  "hello_vue.js.map": "/packs/hello_vue-e751c1fd34e8837397fd.js.map",
+  "hello_vue.js": "/packs/hello_vue-4a463d9b3503d35f621b.js",
+  "hello_vue.js.map": "/packs/hello_vue-4a463d9b3503d35f621b.js.map",
   "media/fonts/materialdesignicons-webfont.eot?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-53f53f50.eot",
   "media/fonts/materialdesignicons-webfont.ttf?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-0e4e0b3d.ttf",
   "media/fonts/materialdesignicons-webfont.woff2?v=5.9.55": "/packs/media/fonts/materialdesignicons-webfont-e9db4005.woff2",

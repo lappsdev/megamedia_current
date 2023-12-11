@@ -75,4 +75,4 @@ group :test do
   gem 'database_cleaner', '~> 1.7'
 end
 
-gem 'polaris_view_components', '~> 1.0'
+gem 'polaris_view_components', '1.1'

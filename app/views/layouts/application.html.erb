@@ -25,6 +25,7 @@
         <% top_bar.with_user_menu(name: Current.user.name, detail: Current.user.group.name) do |user_menu| %>
           <% user_menu.with_avatar(initials: Current.user.name[0]) %>
           <%= polaris_action_list do |action_list| %>
+            <% action_list.with_item(url: group_url(Current.user.group)) { "Ver grupo" } %>
             <% action_list.with_item(icon: "LogOutMinor", url: session_path(Current.session), data: {turbo: "true", method: :delete,  "turbo-method": :delete }) { "Sair" } %>
           <% end %>
         <% end %>

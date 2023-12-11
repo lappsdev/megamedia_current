@@ -1,0 +1,15 @@
+<%= polaris_page(
+  title: "Editar unidade #{@unit.name}",
+  subtitle: "Grupo: #{@unit.group.name}",
+  back_url: unit_url(@unit),
+
+  secondary_actions: [
+    { content: "Excluir", url: unit_path(@unit), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
+  ]
+) do |page| %>
+  <div>
+    <%= polaris_card(title: "Informações") do %>
+      <%= render 'form', unit: @unit%>
+    <% end %>
+  </div>
+<% end %>

@@ -7,13 +7,16 @@
     { content: "Excluir", url: unit_path(@unit), destructive: true, data: {turbo: true, "turbo-method": :delete, turbo_confirm: "Tem certeza?"} },
   ]
 ) do |page| %>
-  <% page.with_primary_action(disabled: true) { "Editar" } %>
+  <% page.with_primary_action(url: edit_unit_url(@unit)) { "Editar" } %>
   <%= polaris_layout do |layout| %>
     <% layout.with_section do %>
       <%= polaris_card(title: "Informações") do %>
         <%= polaris_description_list do |list| %>
           <% list.with_item(term: "Nome") do %>
             <%= @unit.name %>
+          <% end %>
+          <% list.with_item(term: "CNPJ") do %>
+            <%= @unit.cnpj %>
           <% end %>
           <% list.with_item(term: "Grupo") do %>
             <%= @unit.group.name %>

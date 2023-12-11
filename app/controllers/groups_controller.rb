@@ -1,12 +1,19 @@
 class GroupsController < ApplicationController
+  before_action :set_group, only: %i[show edit update destroy]
+
   def index
     groups = GroupResource.all(params)
     respond_with(groups)
   end
 
   def show
-    group = GroupResource.find(params)
-    respond_with(group)
+    respond_to do |format|
+      format.html
+      format.jsonapi do
+        group = GroupResource.find(params)
+        respond_with(group)
+      end
+    end
   end
 
   def create
@@ -20,12 +27,23 @@ class GroupsController < ApplicationController
   end
 
   def update
-    group = GroupResource.find(params)
+    respond_to do |format|
+      format.html do
+        if @group.update(group_params)
+          redirect_to group_url(@group), notice: 'Grupo atualizado com sucesso.'
+        else
+          render :show, status: :unprocessable_entity
+        end
+      end
+      format.jsonapi do
+        group = GroupResource.find(params)
 
-    if group.update_attributes
-      render jsonapi: group
-    else
-      render jsonapi_errors: group
+        if group.update_attributes
+          render jsonapi: group
+        else
+          render jsonapi_errors: group
+        end
+      end
     end
   end
 
@@ -37,5 +55,15 @@ class GroupsController < ApplicationController
     else
       render jsonapi_errors: group
     end
+  end
+
+  private
+
+  def group_params
+    params.require(:group).permit!
+  end
+
+  def set_group
+    @group = Group.find(params[:id])
   end
 end

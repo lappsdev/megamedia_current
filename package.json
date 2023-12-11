@@ -11,7 +11,7 @@
     "@turbo-boost/commands": "^0.0.13",
     "actioncable-vue": "^2.3.2",
     "isomorphic-fetch": "^3.0.0",
-    "polaris-view-components": "^1.0.0",
+    "polaris-view-components": "1.2.0",
     "sass": "^1.26.12",
     "sass-loader": "^10.0.2",
     "spraypaint": "^0.10.22",

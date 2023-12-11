@@ -1025,6 +1025,11 @@
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.1.tgz#e3de23623b0c52c247aba4cd5d530d257008676b"
   integrity sha512-HGlzDcf9vv/EQrMJ5ZG6VWNs8Z/xMN+1o2OhV1gKiSG6CqZt5MCBB1gRg5ILiN3U0jEAxuDTNPRfBcnZBDmupQ==
 
+"@hotwired/stimulus@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
+  integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
+
 "@hotwired/turbo-rails@^7.3.0":
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.3.0.tgz#422c21752509f3edcd6c7b2725bbe9e157815f51"
@@ -5684,12 +5689,12 @@ pnp-webpack-plugin@^1.7.0:
   dependencies:
     ts-pnp "^1.1.6"
 
-polaris-view-components@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/polaris-view-components/-/polaris-view-components-1.0.0.tgz#523aba2846687049dddc65dd9722692490daeae7"
-  integrity sha512-9nn6VdynV3n2aZRMWUOoHGle8bwkZ2xUob45DFAoygJVZGSyC3hNPazAEvlvAGHdo9qjB3Nys17lA6xKSskMZg==
+polaris-view-components@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/polaris-view-components/-/polaris-view-components-1.2.0.tgz#058bc1545e0536e65f9420da3e24181e3dd50f10"
+  integrity sha512-czy45FppGpVRdfbASQ7YIbt9Y6yUITL2K30JuPdvrzSzqsNidUQq/VC59MQk7EybOlefOvHjEtE7QhTddjiT2w==
   dependencies:
-    "@hotwired/stimulus" "^3.2.1"
+    "@hotwired/stimulus" "^3.2.2"
     "@rails/request.js" "^0.0.8"
 
 portfinder@^1.0.26:

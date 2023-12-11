@@ -9,7 +9,11 @@ class PriceCheckerWidget < Widget
   has_one :attachment, through: :media
   has_many :price_checks
   def find_product(barcode:)
-    Product.find_by_barcode(barcode, connection: flex_connection, unit_code: flex_data.unit_code)
+    if use_rp_info_api?
+      unit.rp_info_api.get_product_by_barcode(barcode)
+    else
+      Product.find_by_barcode(barcode, connection: flex_connection, unit_code: flex_data.unit_code)
+    end
   end
 
   def flex_connection
@@ -18,6 +22,10 @@ class PriceCheckerWidget < Widget
 
   def flex_data
     has_flex_settings? ? flex_settings : unit&.flex_settings
+  end
+
+  def use_rp_info_api?
+    false
   end
 
   def has_flex_settings?

@@ -5,6 +5,9 @@
       <%= form.polaris_text_field(:name,  label: "Nome da unidade", required: true) %>
     <% end %>
     <% form_layout.with_item do %>
+      <%= form.polaris_text_field(:cnpj,  label: "CNPJ da unidade") %>
+    <% end %>
+    <% form_layout.with_item do %>
       <%= polaris_button(submit: true, primary: true) { unit.persisted? ? "Alterar" : "Cadastrar" } %>
     <% end %>
   <% end %>

@@ -13,27 +13,6 @@
     <% end %>
   <% end %>
   <%= polaris_card do %>
-    <%= polaris_resource_list do %>
-      <% @attachments.each do |attachment| %>
-        <%= polaris_resource_item(url: attachment_path(attachment.id)) do |c| %>
-          <% c.with_media do %>
-            <% if attachment.image? %>
-              <%= polaris_avatar(source: rails_blob_path(attachment.file, only_path: true), size: :large, shape: :square, name: attachment.name) %>
-            <% else %>
-              <%= polaris_avatar(customer: true, size: :large, shape: :square, name: attachment.name) %>
-            <% end %>
-          <% end %>
-          <h3>
-            <%= polaris_text_style(variation: :strong) { attachment.name } %>
-          </h3>
-          <div>Nome do arquivo: <%= attachment.file.filename %></div>
-          <div><%= polaris_text_style(variation: :subdued) { "Data de upload: #{attachment.created_at.strftime("%d/%m/%Y")}" } %></div>
-          <div>
-            <%= polaris_badge(status: :success) { "Mídia em exibição" } if !attachment.expired? %>
-            <%= polaris_badge(status: :critical) { "Mídia expirada" } if attachment.expired? %>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= render 'list', attachments: @attachments%>
   <% end %>
 <% end %>

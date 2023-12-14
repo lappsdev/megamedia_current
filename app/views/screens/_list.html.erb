@@ -1,0 +1,21 @@
+<%= polaris_resource_list do |resource_list| %>
+  <% resource_list.with_filters(      disabled: true,
+      help_text: "Funcionalidade em desenvolvimento.") do |filters| %>
+    <% filters.with_query(name: :query, placeholder: "Filtrar unidades") %>
+  <% end %>
+  <% if screens.present? %>
+    <% screens.each do |screen| %>
+      <%= polaris_resource_item(url: screen_path(screen) + "#/admin/screenEdit/" + screen.id.to_s) do |c| %>
+        <h3>
+          <%= polaris_text_style(variation: :strong) { screen.name } %>
+        </h3>
+        <span>Equipamento: <%= screen.device.name %></span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= polaris_empty_search_results(
+    title: "Nenhuma tela encontrada",
+    description: "Cadastre uma nova tela ou ajuste os critérios de busca."
+  ) %>
+  <% end %>
+<% end%>

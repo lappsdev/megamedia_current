@@ -12,6 +12,21 @@ class Product
     balance_code || SecureRandom.random_number(10_000)
   end
 
+  def promotional_price=(value)
+    super
+    self[:promotional_price] = nil if value.zero?
+  end
+
+  def fator_promotional_price=(value)
+    super
+    self[:fator_promotional_price] = nil if value.zero?
+  end
+
+  def fator_promotional=(value)
+    super
+    self[:fator_promotional] = nil if value.zero?
+  end
+
   def self.find_all_by_balance_codes(balance_codes:, unit_code:, connection:)
     codes = balance_codes.map { |e| "'#{e}'" }.join(',')
     query = "SELECT substring(prod_codbarras,7, 6) AS balance_code,

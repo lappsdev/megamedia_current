@@ -3,7 +3,7 @@ class UnitsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html { @units = Current.user.group.units }
+      format.html { @units = policy_scope(Unit) }
       format.jsonapi do
         units = UnitResource.all(params)
         respond_with(units)
@@ -13,7 +13,7 @@ class UnitsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html { @unit = Unit.find(params[:id]) }
+      format.html { @unit = policy_scope(Unit).find(params[:id]) }
       format.jsonapi do
         unit = UnitResource.find(params)
         respond_with(unit)
@@ -90,6 +90,6 @@ class UnitsController < ApplicationController
   end
 
   def set_unit
-    @unit = Unit.find(params[:id])
+    @unit = policy_scope(Unit).find(params[:id])
   end
 end

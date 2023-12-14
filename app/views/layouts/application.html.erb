@@ -2,6 +2,9 @@
 <html style="<%= polaris_html_styles %>">
   <head>
     <title>Varejo 4 Tech</title>
+    <script>
+      localStorage.setItem("token", "<%= @json_web_token%>");
+    </script>
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,9 +16,6 @@
     <%= turbo_boost.meta_tag %>
   </head>
   <body style="<%= polaris_body_styles %>">
-    <script>
-      localStorage.setItem("token", "<%= @json_web_token%>");
-    </script>
     <%= polaris_frame(  logo: {
     url: "/",
     src: "/logo.png",
@@ -32,10 +32,10 @@
       <% end if Current.user %>
       <% frame.with_navigation do |navigation| %>
         <% navigation.with_section(title: "Varejo4Tech") do |section| %>
-          <% section.with_item(url: "/", label: "Tela inicial", icon: "HomeMinor") %>
+          <% section.with_item(url: "/", label: "Tela inicial", icon: "HomeMinor", data: {turbo: true}) %>
           <% section.with_item(url: units_path, label: "Unidades", icon: "BankMajor", data: {turbo: true}) %>
-          <% section.with_item(url: devices_path+ "#/admin/devices", label: "Equipamentos", icon: "AutomationMajor") %>
-          <% section.with_item(url: screens_path + "#/admin/screens", label: "Telas", icon: "DesktopMajor") %>
+          <% section.with_item(url: devices_path+ "#/admin/devices", label: "Equipamentos", icon: "AutomationMajor", data: {turbo: true}) %>
+          <% section.with_item(url: screens_path + "#/admin/screens", label: "Telas", icon: "DesktopMajor", data: {turbo: true}) %>
           <% section.with_item(url: attachments_path, label: "Mídias", icon: "ImageMajor", data: {turbo: true}) %>
           <% section.with_item(url: users_path, label: "Usuários", icon: "CustomersMajor", data: {turbo: true}) %>
         <% end %>

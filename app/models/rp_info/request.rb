@@ -1,10 +1,11 @@
 class RpInfo::Request
-  def self.post(path, params, signature: nil, api_token: nil, api_secret: nil, use_ssl: false)
+  def self.post(path, params, token: nil, use_ssl: false)
     uri = URI(path)
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: use_ssl, read_timeout: 5,
                                                    open_timeout: 5) do |http|
       request = Net::HTTP::Post.new(uri.to_s)
       request['Content-Type'] = 'application/json'
+      request['token'] = token if token
 
       request.body = params.to_json
       http.request request
@@ -12,13 +13,14 @@ class RpInfo::Request
     JSON.parse(response.body)
   end
 
-  def self.get(path, params, signature: nil, api_token: nil, api_secret: nil, use_ssl: false)
+  def self.get(path, params = {}, token: nil, use_ssl: false)
     uri = URI(path_with_params(path, params))
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: use_ssl, read_timeout: 5,
                                                    open_timeout: 5) do |http|
       request = Net::HTTP::Get.new(uri.to_s)
-      request['Authorization'] = api_token || Zlinpay.api_token
-      request['Signature'] = signature || Zlinpay.generate_signature(api_token: api_token, api_secret: api_secret)
+      request['Content-Type'] = 'application/json'
+
+      request['token'] = token if token
 
       http.request request
     end

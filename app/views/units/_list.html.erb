@@ -3,12 +3,19 @@
       help_text: "Funcionalidade em desenvolvimento.") do |filters| %>
     <% filters.with_query(name: :query, placeholder: "Filtrar unidades") %>
   <% end %>
-  <% units.each do |unit| %>
-    <%= polaris_resource_item(url: unit_path(unit)) do |c| %>
-      <h3>
-        <%= polaris_text_style(variation: :strong) { unit.name } %>
-      </h3>
-      <span>CNPJ: <%= unit.cnpj %></span>
+  <% if units.present? %>
+    <% units.each do |unit| %>
+      <%= polaris_resource_item(url: unit_path(unit)) do |c| %>
+        <h3>
+          <%= polaris_text_style(variation: :strong) { unit.name } %>
+        </h3>
+        <span>CNPJ: <%= unit.cnpj %></span>
+      <% end %>
     <% end %>
+  <% else %>
+    <%= polaris_empty_search_results(
+    title: "Nenhuma unidade encontrada",
+    description: "Cadastre uma nova unidade ou ajuste os critérios de busca."
+  ) %>
   <% end %>
 <% end%>

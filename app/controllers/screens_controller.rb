@@ -1,19 +1,22 @@
 class ScreensController < ApplicationController
   def index
     respond_to do |format|
-      format.html{ @screens = Current.user.group.screens }
-      format.jsonapi{
+      format.html { @screens = Current.user.group.screens }
+      format.jsonapi do
         screens = ScreenResource.all(params)
         respond_with(screens)
-      }
+      end
     end
-
-
   end
 
   def show
-    screen = ScreenResource.find(params)
-    respond_with(screen)
+    respond_to do |format|
+      format.html
+      format.jsonapi do
+        screen = ScreenResource.find(params)
+        respond_with(screen)
+      end
+    end
   end
 
   def create

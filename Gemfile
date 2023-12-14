@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'jwt'
 gem 'kaminari'
 gem 'money-rails', '~>1.12'
+gem 'motor-admin', '0.4.4'
 gem 'net-ssh'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.0'
@@ -26,7 +27,6 @@ gem 'store_base_sti_class'
 gem 'turbo_boost-commands'
 gem 'turbo-rails'
 gem 'webpacker', '~>5.0'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -76,3 +76,5 @@ group :test do
 end
 
 gem 'polaris_view_components', '1.1'
+
+gem 'pundit', '~> 2.3'

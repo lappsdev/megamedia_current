@@ -1,26 +1,28 @@
 class ApplicationController < ActionController::Base
   include Graphiti::Rails
   include Graphiti::Responders
+  include Pundit::Authorization
   skip_before_action :verify_authenticity_token
   before_action :set_ip
   before_action :set_current_request_details
   before_action :authenticate
   before_action :determine_format
+  def pundit_user
+    Current.user || Current.device
+  end
 
   private
 
   def set_ip
-    p params[:ip]
-    p params
     @ip = params[:ip] || request.headers['X-Forwarded-For'] || request.env['HTTP_X_FORWARDED_FOR'] || request.remote_addr
   end
 
   def authenticate
-    p jwt
     if jwt
       credential = Credential.load(jwt)
       @json_web_token = credential.json_web_token
       Current.device = credential.device
+      Current.user = credential.user
     elsif session_record = Session.find_by_id(cookies.signed[:session_token])
       Current.session = session_record
       credential = Credential.create({ login: Current.session.user.login, password: 'teste123123' }).tap do |c|

@@ -5,17 +5,17 @@
     <%= polaris_layout do |layout| %>
       <% layout.with_section(one_half: true) do %>
         <%= polaris_card(title: "Equipamentos cadastrados", actions: [{ content: "Ver todos", url: devices_url }]) do  |card|%>
-          <%= polaris_display_text(size: :extra_large) { "#{Device.count}"} %>
+          <%= polaris_display_text(size: :extra_large) { "#{policy_scope(Device).count}"} %>
         <% end %>
       <% end %>
       <% layout.with_section(one_half: true) do %>
         <%= polaris_card(title: "Mídias cadastradas", actions: [{ content: "Ver todas", url: attachments_url }]) do  |card|%>
-          <%= polaris_display_text(size: :extra_large) { "#{Attachment.count}"} %>
+          <%= polaris_display_text(size: :extra_large) { "#{policy_scope(Attachment).count}"} %>
         <% end %>
       <% end %>
       <% layout.with_section do %>
         <%= polaris_card(title: "Unidades cadastradas", actions: [{ content: "Ver todas", url: units_url }]) do  |card|%>
-          <%= polaris_display_text(size: :extra_large) { "#{Unit.count}"} %>
+          <%= polaris_display_text(size: :extra_large) { "#{policy_scope(Unit).count}"} %>
         <% end %>
       <% end %>
     <% end %>

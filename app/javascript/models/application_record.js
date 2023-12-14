@@ -19,6 +19,7 @@ export const ApplicationRecord = SpraypaintBase.extend({
     sync: true,
     middlewareStack: middleware,
     generateAuthHeader: function (token) {
+      console.log("CARALHO" + token)
       return "Bearer " + token;
     },
     $auth: null

@@ -4,7 +4,7 @@
     <% form_layout.with_item do %>
       <%= form.polaris_select(:unit_id, 
     label: "Unidade", 
-    options: Unit.all.map {|unit| [unit.name, unit.id]}.to_h,
+    options: policy_scope(Unit).map {|unit| [unit.name, unit.id]}.to_h,
     required: true, 
     selected: unit&.id.to_s,
     disabled: unit.present?

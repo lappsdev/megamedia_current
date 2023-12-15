@@ -46,8 +46,10 @@ class ApplicationPolicy
     def resolve
       if user.is_a?(Device)
         resolve_for_device
-      else
+      elsif user.is_a?(User)
         resolve_for_user
+      else
+        scope.none
       end
     end
 

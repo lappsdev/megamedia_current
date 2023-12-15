@@ -35,15 +35,16 @@ class ApplicationController < ActionController::Base
         c.mint_jwt! if c.errors.blank?
       end
       @json_web_token = credential.json_web_token
-    elsif device = Device.find_by(ip: @ip)
-      Current.device = device
-      credential = Credential.create({ ip: @ip }).tap do |c|
-        c.mint_jwt! if c.errors.blank?
-      end
-      @json_web_token = credential.json_web_token
+
     elsif device = Device.find_by(uuid: @uuid)
       Current.device = device
       credential = Credential.create({ uuid: @uuid }).tap do |c|
+        c.mint_jwt! if c.errors.blank?
+      end
+      @json_web_token = credential.json_web_token
+    elsif device = Device.find_by(ip: @ip)
+      Current.device = device
+      credential = Credential.create({ ip: @ip }).tap do |c|
         c.mint_jwt! if c.errors.blank?
       end
       @json_web_token = credential.json_web_token

@@ -4,7 +4,7 @@ class CredentialResource < ApplicationResource
 
   attribute :login, :string, only: %i[readable writable]
   attribute :password, :string, only: :writable
-  attribute :json_web_token, :string, only: :readable
+  attribute :json_web_token, :string
   attribute :ip, :string, only: :writable
   belongs_to :user
   belongs_to :device

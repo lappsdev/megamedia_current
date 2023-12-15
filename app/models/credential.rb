@@ -21,9 +21,14 @@ class Credential
     end
 
     def create(attrs)
+      p attrs
       if attrs[:json_web_token]
-        credential.user = self.load(jwt).user
-        credential.device = self.load(jwt).device
+        p 'AQUI'
+        new(json_web_token: attrs[:json_web_token]).tap do |credential|
+          credential.user = self.load(attrs[:json_web_token]).user
+          credential.device = self.load(attrs[:json_web_token]).device
+        end
+
       elsif attrs[:login]
         new(login: attrs[:login]).tap do |credential|
           if user = User.find_by(login: attrs[:login])

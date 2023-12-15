@@ -17,10 +17,12 @@ import ScreenEdit from 'pages/ScreenEdit'
 import Attachments from 'pages/Attachments'
 import Attachment from 'pages/Attachment'
 import Unit from 'pages/Unit'
+import store from "store"
+import { User } from '../models/user.model'
+import { Credential } from '../models/credential.model'
 
 Vue.use(VueRouter)
-
-export default new VueRouter({
+const router = new VueRouter({
     routes: [
         { path: "/", redirect: "/login" },
         {
@@ -96,3 +98,21 @@ export default new VueRouter({
         }
     ]
 })
+router.beforeEach((to, from, next) => {
+    if (User.current() == null && localStorage.getItem("token") != null) {
+        let credential = new Credential({ jsonWebToken: localStorage.getItem("token") })
+        credential
+            .save({ returnScope: Credential.includes(["user", { user: "group" }]) })
+            .then((success) => {
+                if (success) {
+                    store.commit("SET_CURRENT_USER", credential.user)
+                    localStorage.setItem("token", credential.jsonWebToken);
+                }
+                next()
+
+            })
+    } else {
+        next();
+    }
+})
+export default router;

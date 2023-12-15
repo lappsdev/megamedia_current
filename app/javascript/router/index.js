@@ -105,7 +105,9 @@ router.beforeEach((to, from, next) => {
             .save({ returnScope: Credential.includes(["user", { user: "group" }]) })
             .then((success) => {
                 if (success) {
-                    store.commit("SET_CURRENT_USER", credential.user)
+                    if (credential.user) {
+                        store.commit("SET_CURRENT_USER", credential.user)
+                    }
                     localStorage.setItem("token", credential.jsonWebToken);
                 }
                 next()

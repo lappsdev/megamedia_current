@@ -10,9 +10,15 @@ class CredentialsController < ApplicationController
     if jwt
       credential = Credential.load(jwt)
       @json_web_token = credential.json_web_token
-      Current.device = credential.device
-      params[:data][:attributes] = {}
-      params[:data][:attributes][:ip] = Current.device.ip
+      if credential.device
+        Current.device = credential.device
+        params[:data][:attributes] = {}
+        params[:data][:attributes][:ip] = Current.device.ip
+      elsif credential.user
+        Current.user = credential.user
+        params[:data][:attributes] = {}
+        params[:data][:attributes][:json_web_token] = @json_web_token
+      end
     end
     credential = CredentialResource.build(params)
 

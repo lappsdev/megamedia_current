@@ -1,7 +1,7 @@
 class Credential
   include ActiveModel::Model
 
-  attr_accessor :user, :device, :login, :json_web_token, :password, :ip
+  attr_accessor :user, :device, :login, :json_web_token, :password, :ip, :uuid
 
   class << self
     def secret
@@ -44,6 +44,14 @@ class Credential
             credential.device = device
           else
             credential.errors.add(:remote_ip, 'IP não vinculado a nenhum dispostivo.')
+          end
+        end
+      elsif attrs[:uuid]
+        new(uuid: attrs[:uuid]).tap do |credential|
+          if device = Device.find_by(uuid: attrs[:uuid])
+            credential.device = device
+          else
+            credential.errors.add(:remote_ip, 'UUID não vinculado a nenhum dispostivo.')
           end
         end
       end

@@ -11,6 +11,7 @@
         </h3>
         <div>IP: <%= device.ip %></div>
         <div>Unidade: <%= device.unit.name %></div>
+        <div>UUID: <%= device.uuid %></div>
         <% if device.notes %>
           <%= polaris_text_style(variation: :strong) { "OBS: #{device.notes}" } %>
         <% end %>

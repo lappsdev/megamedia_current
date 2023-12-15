@@ -23,6 +23,9 @@
         <% list.with_item(term: "MAC ") do %>
           <%= @device.mac %>
         <% end %>
+        <% list.with_item(term: "UUID") do %>
+          <%= @device.uuid %>
+        <% end %>
         <% list.with_item(term: "Data de cadastro") do %>
           <%= @device.created_at.strftime("%d/%m/%Y às %H:%M:%S")%>
         <% end %>

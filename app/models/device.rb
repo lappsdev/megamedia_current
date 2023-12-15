@@ -7,6 +7,7 @@ class Device < ApplicationRecord
   belongs_to :department, optional: true
   attr_json :ssh_settings, JsonTypes::SshSettings.to_type, default: {}
   validate :validate_department_from_unit
+  after_create :create_screen
   def execute_ssh
     return unless ssh_settings && ssh_settings.host
 
@@ -16,6 +17,12 @@ class Device < ApplicationRecord
   end
 
   private
+
+  def create_screen
+    return unless screen.nil?
+
+    Screen.create(device: self, group: unit.group, name: name)
+  end
 
   def validate_department_from_unit
     return if department.nil?

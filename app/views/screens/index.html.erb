@@ -2,7 +2,6 @@
   title: "Telas",
   compact_title: true,
   back_url: "/#") do |page| %>
-  <% page.with_primary_action(url: new_screen_path) { "Cadastrar novo" } %>
   <%= polaris_card do %>
     <% render 'list', screens: @screens%>
   <% end %>

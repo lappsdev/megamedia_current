@@ -34,12 +34,13 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  #config.active_storage.service = :local
+  # config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # sconfig.action_cable.url = 'wss://example.com/cable'
-  config.action_cable.allowed_request_origins = ['http://192.168.1.185', 'http://localhost:3000', 'http://localhost:3001']
+  config.action_cable.allowed_request_origins = ['https://app.varejo4.tech', 'http://app.varejo4.tech',
+                                                 'http://192.168.1.185', 'http://localhost:3000', 'http://localhost:3001']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -77,11 +78,11 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
-  config.logger = Logger.new(config.paths["log"].first, 1, 10.megabytes)
+  config.logger = Logger.new(config.paths['log'].first, 1, 10.megabytes)
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::Logger.new(nil) 
+    config.logger    = ActiveSupport::Logger.new(nil)
   end
 
   # Do not dump schema after migrations.

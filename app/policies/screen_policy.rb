@@ -6,7 +6,8 @@ class ScreenPolicy < ApplicationPolicy
     end
 
     def resolve_for_device
-      scope.where(device_id: device.id)
+      # scope.where(device_id: device.id)
+      scope.all
     end
   end
 end

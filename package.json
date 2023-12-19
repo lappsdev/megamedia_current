@@ -28,7 +28,7 @@
     "vue-router": "^3.4.3",
     "vue-template-compiler": "^2.6.11",
     "vue2-dropzone": "^3.6.0",
-    "vuetify": "^2.3.1",
+    "vuetify": "2.6.15",
     "vuetify-datetime-picker": "^2.1.1",
     "vuetify-dialog": "^2.0.12",
     "vuetify-form-base": "^0.2.7",

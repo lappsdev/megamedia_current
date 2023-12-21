@@ -1,12 +1,5 @@
 <template>
   <div :style="`width: 100%; height: ${windowHeight}px; max-height: ${windowHeight}px`">
-    <v-system-bar dark color="green darken-2">
-      <v-icon>mdi-message</v-icon>
-      <span>Paraná Supermercados - Bons Momentos</span>
-      <v-spacer></v-spacer>
-      <span>Conectado </span>
-      <v-icon>mdi-wifi-strength-4</v-icon>
-    </v-system-bar>
     <grid-layout v-if="screen" :style="`height: ${windowHeight}px; max-height: ${windowHeight}px`" :layout.sync="layout"
       :col-num="12" :autoSize="false" :is-draggable="false" :is-resizable="false" :is-mirrored="false"
       :rowHeight="rowHeight" :vertical-compact="false" :maxRows="12" :margin="[0, 0]" :use-css-transforms="false">

@@ -21,7 +21,7 @@
     "vue-async-computed": "^3.9.0",
     "vue-barcode-scanner": "^0.8.1",
     "vue-browser-acl": "^0.15.2",
-    "vue-grid-layout": "^2.3.11",
+    "vue-grid-layout": "2.4.0",
     "vue-loader": "^15.9.2",
     "vue-moment": "^4.1.0",
     "vue-resize-text": "^0.1.1",

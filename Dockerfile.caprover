@@ -41,12 +41,11 @@ COPY Gemfile.lock /varejo4tech/Gemfile.lock
 COPY . /varejo4tech
 
 WORKDIR /varejo4tech
-RUN node -v
-RUN yarn install
 
 RUN bundle install --without development test
 
 COPY package.json /varejo4tech/package.json
+RUN yarn install
 
 ENV RAILS_ENV='production'
 ENV RACK_ENV='production' 

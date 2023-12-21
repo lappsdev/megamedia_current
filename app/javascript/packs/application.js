@@ -63,7 +63,7 @@ var env = process.env.RAILS_ENV || "development"
 Vue.use(ActionCableVue, {
   debug: true,
   debugLevel: 'error',
-  connectionUrl: env == "development" ? 'ws://localhost:5000/cable' : 'ws://192.168.1.185:5000/cable', // or function which returns a string with your JWT appended to your server URL as a query parameter
+  connectionUrl: env == "development" ? 'ws://localhost:5000/cable' : 'ws://app.varejo4.tech/cable', // or function which returns a string with your JWT appended to your server URL as a query parameter
   connectImmediately: true,
 });
 Vue.use(VueBarcodeScanner)

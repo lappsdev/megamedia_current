@@ -15,7 +15,7 @@
     <%= stylesheet_link_tag "polaris_view_components" %>
     <%= turbo_boost.meta_tag %>
   </head>
-  <body style="<%= polaris_body_styles %>">
+  <body style="<%= polaris_body_styles %> <%= 'overflow:hidden;' if Current.device %>">
     <%= polaris_frame(  logo: {
     url: "/",
     src: "/logo.png",

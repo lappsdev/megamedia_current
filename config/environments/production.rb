@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # sconfig.action_cable.url = 'wss://example.com/cable'
   config.action_cable.allowed_request_origins = ['https://app.varejo4.tech', 'http://app.varejo4.tech',
-                                                 'http://192.168.1.185', 'http://localhost:3000', 'http://localhost:3001']
+                                                 'http://192.168.1.185', 'http://192.168.1.185:5000', 'http://localhost:3000', 'http://localhost:3001']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

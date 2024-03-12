@@ -14,17 +14,17 @@ class Product
 
   def promotional_price=(value)
     super
-    self[:promotional_price] = nil if value.zero?
+    self[:promotional_price] = nil if value.to_f.zero?
   end
 
   def fator_promotional_price=(value)
     super
-    self[:fator_promotional_price] = nil if value.zero?
+    self[:fator_promotional_price] = nil if value.to_f.zero?
   end
 
   def fator_promotional=(value)
     super
-    self[:fator_promotional] = nil if value.zero?
+    self[:fator_promotional] = nil if value.to_f.zero?
   end
 
   def self.find_all_by_balance_codes(balance_codes:, unit_code:, connection:)

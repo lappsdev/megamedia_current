@@ -24,10 +24,10 @@ default: &default
 development:
   <<: *default
   database: aquiagora
-  host: 192.95.4.121
+  host: 191.235.92.235
   username: varejo4tech
   port: 5432
-  password: H48ajAL1S8Bn4sqE
+  password: djYNIE63aa6xHCQWH4P5
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -88,8 +88,8 @@ test:
 production:
   <<: *default
   database: aquiagora
-  host: 192.95.4.121
+  host: 191.235.92.235
   username: varejo4tech
   port: 5432
-  password: H48ajAL1S8Bn4sqE
+  password: djYNIE63aa6xHCQWH4P5
 

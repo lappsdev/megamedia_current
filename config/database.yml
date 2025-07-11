@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   database: aquiagora
-  host: 172.17.0.1
+  host: 10.80.0.20
   username: varejo4tech
   port: 5432
   password: djYNIE63aa6xHCQWH4P5
@@ -88,7 +88,7 @@ test:
 production:
   <<: *default
   database: aquiagora
-  host: 172.17.0.1
+  host: 10.80.0.20
   username: varejo4tech
   port: 5432
   password: djYNIE63aa6xHCQWH4P5

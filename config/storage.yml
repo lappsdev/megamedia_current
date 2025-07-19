@@ -7,7 +7,7 @@ local:
   root: <%= Rails.root.join("storage") %>
 minio:
     service: S3
-    endpoint: https://storage-api.apps.varejo4.tech
+    endpoint: https://storage-api.varejo4tech.paranasuper.com.br
 
     access_key_id: <%= ENV["MINIO_ACCESS_KEY"]  %>
     secret_access_key: <%= ENV["MINIO_SECRET_KEY"] %>
